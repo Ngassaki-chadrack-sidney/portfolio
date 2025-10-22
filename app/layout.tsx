@@ -11,11 +11,11 @@ const clashDisplay = localFont({
       weight: "400",
       style: "normal",
     },
-    {
-      path: "../public/fonts/ClashDisplay/ClashDisplay-SemiBold.woff2",
-      weight: "600",
-      style: "normal",
-    },
+    // {
+    //   path: "../public/fonts/ClashDisplay/ClashDisplay-SemiBold.woff2",
+    //   weight: "600",
+    //   style: "normal",
+    // },
     {
       path: "../public/fonts/ClashDisplay/ClashDisplay-Bold.woff2",
       weight: "700",
