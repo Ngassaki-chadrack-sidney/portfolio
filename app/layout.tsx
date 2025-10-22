@@ -1,5 +1,29 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import LenisProvider from "@/components/providers/LenisProvider";
+import localFont from "next/font/local";
+import GlobalHeader from "@/components/GlobalHeader";
+
+const clashDisplay = localFont({
+  src: [
+    {
+      path: "../public/fonts/ClashDisplay/ClashDisplay-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/ClashDisplay/ClashDisplay-SemiBold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/ClashDisplay/ClashDisplay-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-clash-display",
+});
 
 export const metadata: Metadata = {
   title: "NGASSAKI Chadrack Sidney",
@@ -13,8 +37,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="fr">
+      <body
+        className={`bg-white text-foreground antialiased selection:bg-accent selection:text-accent-foreground overflow-x-hidden ${clashDisplay.className}`}
+      >
+        <LenisProvider>
+          <GlobalHeader />
+          {children}
+        </LenisProvider>
+      </body>
     </html>
   );
 }

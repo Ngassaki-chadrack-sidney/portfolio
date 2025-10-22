@@ -1,18 +1,18 @@
+"use client";
+
 import React from "react";
-import Haeder from "../Haeder";
+import Header from "../Header";
 import RecentProject from "../RecentProject";
 import Stack from "../Stack";
 import Footer from "../Footer";
 
-function HomePage() {
+export default function HomePage() {
   return (
-    <div className="h-screen w-screen">
-      <Haeder />
+    <div className="w-full bg-white text-black">
+      <Header />
       <RecentProject />
       <Stack />
       <Footer />
     </div>
   );
 }
-
-export default HomePage;
