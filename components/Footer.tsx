@@ -72,7 +72,7 @@ function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative bg-gray-950 text-white overflow-hidden"
+      className="relative bg-black text-white overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-blue-950/20 via-transparent to-purple-950/20 pointer-events-none" />
 
@@ -114,34 +114,35 @@ function Footer() {
               </h3>
               <div className="flex flex-wrap gap-4">
                 {socialMediaAccout.map((social, index) => (
-                  <a
-                    ref={(el) => {
-                      if (el) linksRef.current[index] = el;
-                    }}
-                    href={social.link}
-                    key={social.name}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-gray-800 transition-all duration-300 border rounded-full border-gray-800 hover:border-gray-700"
-                  >
-                    <span className="text-gray-300 group-hover:text-blue-500 transition-colors">
-                      {social.name}
-                    </span>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-white group-hover:text-blue-500 group-hover:translate-x-1 transition-all"
+                  <Magnetic key={social.name} intensity={0.3} range={60}>
+                    <a
+                      ref={(el) => {
+                        if (el) linksRef.current[index] = el;
+                      }}
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-2 px-4 py-2 bg-gray-900 hover:bg-gray-800 transition-all duration-300 border rounded-full border-gray-800 hover:border-gray-700"
                     >
-                      <path d="M7 7h10v10M7 17L17 7" />
-                    </svg>
-                  </a>
+                      <span className="text-gray-300 group-hover:text-blue-500 transition-colors">
+                        {social.name}
+                      </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="text-white group-hover:text-blue-500 group-hover:translate-x-1 transition-all"
+                      >
+                        <path d="M7 7h10v10M7 17L17 7" />
+                      </svg>
+                    </a>
+                  </Magnetic>
                 ))}
               </div>
             </div>
@@ -149,19 +150,20 @@ function Footer() {
 
           <div className="space-y-12">
             <div>
-              <h3 className="text-sm font-semibold text-white uppercase border-b-2 border-b-gray-200 tracking-wider mb-6">
+              <h3 className="text-sm font-semibold text-white uppercase border-b-2 border-b-slate-600 tracking-wider mb-6">
                 Navigation
               </h3>
               <nav className="grid grid-cols-2 gap-4">
                 {[
-                  { label: "Accueil", href: "/" },
-                  { label: "Projets", href: "/projets" },
-                  { label: "Contact", href: "/contact" },
+                  { label: "Accueil", href: "#home" },
+                  { label: "Stack", href: "#stack" },
+                  { label: "Projets", href: "#projects" },
+                  { label: "Contact", href: "#contact" },
                 ].map((link) => (
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-white hover:text-blue-500 transition-colors text-lg font-medium"
+                    className="text-white hover:text-primary transition-colors text-lg font-medium"
                   >
                     {link.label}
                   </Link>
@@ -170,8 +172,8 @@ function Footer() {
             </div>
 
             <div className="flex justify-start lg:justify-end">
-              <Link href="/contact">
-                <Magnetic>
+              <Link href="#contact">
+                <Magnetic intensity={0.5} range={80}>
                   <div
                     ref={ctaRef}
                     className="group relative px-8 py-8 flex items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 transition-all duration-300 shadow-xl shadow-blue-900/50 hover:shadow-2xl hover:shadow-blue-900/70 cursor-pointer"

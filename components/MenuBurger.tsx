@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Magnetic } from "./motion-primitives/magnetic";
 // import { SplitText } from "gsap/SplitText"; // Unused for now
 
 interface MenuBurgerProps {
@@ -16,9 +17,10 @@ interface MenuBurgerProps {
 // } // Unused type
 
 const menuLinks = [
-  { label: "Principal", href: "/" },
-  { label: "Projets", href: "/projets" },
-  { label: "Contact", href: "/contact" },
+  { label: "Accueil", href: "#home" },
+  { label: "Stack", href: "#stack" },
+  { label: "Projets", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const socialLinks = [
@@ -175,56 +177,46 @@ export const MenuBurger: React.FC<MenuBurgerProps> = ({ className = "" }) => {
 
   return (
     <>
-      <motion.button
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        onClick={toggleMenu}
-        className={`w-12 h-12 ml-4 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-colors duration-300 z-[999] ${
-          isOpen ? "bg-blue-500" : "bg-gray-900"
-        } ${className}`}
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <Magnetic intensity={0.5} range={80}>
+        <motion.button
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          onClick={toggleMenu}
+          className={`fixed top-6 left-6 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-colors duration-300 z-[999] ${
+            isOpen ? "bg-primary" : "bg-slate-900 hover:bg-slate-800"
+          } ${className}`}
         >
-          <path
-            id="burger-icon-path"
-            d="M3 6H21M3 12H21M3 18H21"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </motion.button>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="burger-icon-path"
+              d="M3 6H21M3 12H21M3 18H21"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </motion.button>
+      </Magnetic>
 
       <div
         ref={menuRef}
-        className="fixed top-0 right-0 min-h-screen w-full md:w-[450px] bg-gray-900 text-white z-40"
+        className={`fixed top-0 right-0 min-h-screen w-full sm:w-[80%] md:w-[500px] bg-slate-900 text-white z-40`}
         style={{ transform: "translateX(100%)" }}
       >
-        <svg
-          className="absolute top-0 left-0 w-full h-full"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          <path
-            ref={svgRef}
-            d="M 0 0 Q 50 50 0 100 L 100 100 L 100 0 Z"
-            fill="#111827"
-          />
-        </svg>
-
-        <div className="relative z-10 h-full flex flex-col justify-center px-16">
-          <div className="mt-16">
-            <p className="text-xl text-gray-500 mb-8 tracking-wider ">
+        <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 pt-24 md:pt-0">
+          <div className="mt-8 md:mt-0">
+            <p className="text-lg md:text-xl text-slate-400 mb-6 md:mb-8 tracking-wider">
               NAVIGATION
             </p>
-            <div className="w-full h-px bg--gradientto-r from-transparent via-white to-transparent mb-8" />
-            <nav className="space-y-6">
+            <div className="w-full h-px bg-gradient-to-r from-transparent via-slate-400 to-transparent mb-8" />
+            <nav className="space-y-4 md:space-y-6">
               {menuLinks.map((link, index) => (
                 <div
                   key={link.label}
@@ -232,35 +224,42 @@ export const MenuBurger: React.FC<MenuBurgerProps> = ({ className = "" }) => {
                     if (el) navItemsRef.current[index] = el;
                   }}
                 >
-                  <button
-                    onClick={() => {
-                      setIsOpen(false);
-                      animateIcon(false);
-                    }}
-                  >
-                    <Link href={link.href}>
-                      <span className="text-4xl md:text-6xl font-light hover:text-blue-500 transition-colors duration-300 block">
-                        {link.label}
-                      </span>
-                    </Link>
-                  </button>
+                  <Magnetic intensity={0.3} range={60}>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        animateIcon(false);
+                      }}
+                      className="w-full text-left"
+                    >
+                      <Link href={link.href}>
+                        <span className="text-3xl md:text-5xl font-light hover:text-primary transition-colors duration-300 block">
+                          {link.label}
+                        </span>
+                      </Link>
+                    </button>
+                  </Magnetic>
                 </div>
               ))}
             </nav>
           </div>
 
-          <div ref={socialsRef}>
-            <p className="text-lg mb-6 tracking-wider underline">Mes reseaux</p>
-            <div className="flex gap-6">
+          <div ref={socialsRef} className="mt-12 md:mt-16">
+            <p className="text-sm md:text-lg mb-4 md:mb-6 tracking-wider text-slate-300">
+              Mes réseaux
+            </p>
+            <div className="flex flex-wrap gap-3 md:gap-6">
               {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  className="text-sm hover:text-blue-500 transition-colors duration-300"
-                >
-                  {social.label}
-                </a>
+                <Magnetic key={social.label} intensity={0.2} range={50}>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs md:text-sm hover:text-primary transition-colors duration-300"
+                  >
+                    {social.label}
+                  </a>
+                </Magnetic>
               ))}
             </div>
           </div>

@@ -11,11 +11,6 @@ const clashDisplay = localFont({
       weight: "400",
       style: "normal",
     },
-    // {
-    //   path: "../public/fonts/ClashDisplay/ClashDisplay-SemiBold.woff2",
-    //   weight: "600",
-    //   style: "normal",
-    // },
     {
       path: "../public/fonts/ClashDisplay/ClashDisplay-Bold.woff2",
       weight: "700",
@@ -37,9 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" title="NGASSAKI Chadrack portfolio dev">
       <body
-        className={`bg-white text-foreground antialiased selection:bg-accent selection:text-accent-foreground overflow-x-hidden ${clashDisplay.className}`}
+        className={`text-foreground antialiased selection:bg-accent selection:text-accent-foreground overflow-x-hidden ${clashDisplay.className}`}
       >
         <LenisProvider>
           <GlobalHeader />

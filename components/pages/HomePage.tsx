@@ -2,16 +2,16 @@
 
 import React from "react";
 import Header from "../Header";
-import RecentProject from "../RecentProject";
-import Stack from "../Stack";
+import StackAndProjectsSection from "../StackAndProjectsSection";
+import ContactSection from "../ContactSection";
 import Footer from "../Footer";
 
 export default function HomePage() {
   return (
-    <div className="w-full bg-white text-black">
+    <div id="home" className="w-full bg-slate-900 text-foreground">
       <Header />
-      <RecentProject />
-      <Stack />
+      <StackAndProjectsSection />
+      <ContactSection />
       <Footer />
     </div>
   );
