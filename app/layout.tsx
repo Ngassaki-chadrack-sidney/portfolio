@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LenisProvider } from "@/components/Lenis/LenisProvider";
 import localFont from "next/font/local";
+import PageTransistion from "@/components/animations/PageTransistion";
 
 const customFont = localFont({
   src: "../public/font.ttf",
@@ -63,14 +64,15 @@ export const metadata: Metadata = {
       "Développeur Full-Stack & Mobile passionné. Je crée des solutions performantes et innovantes.",
     images: ["https://ngassaki-chadrack.com/og-image.png"],
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
-  },
   alternates: {
     canonical: "https://ngassaki-chadrack.com",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -89,7 +91,9 @@ export default function RootLayout({
       <body
         className={`${customFont.className} bg-black text-white antialiased`}
       >
-        <LenisProvider>{children}</LenisProvider>
+        <LenisProvider>
+          <PageTransistion>{children}</PageTransistion>
+        </LenisProvider>
       </body>
     </html>
   );

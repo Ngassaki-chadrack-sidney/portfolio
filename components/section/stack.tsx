@@ -2,6 +2,8 @@
 
 import { Code2, Smartphone, Zap } from "lucide-react";
 import { motion } from "framer-motion";
+import { CascadeAnimation } from "@/components/animations/CascadeAnimation";
+import { TextAnimation } from "@/components/animations/TextAnimation";
 
 const frontendStack = [
   {
@@ -207,68 +209,92 @@ function Stack() {
     <section id="stack" className="w-full py-20 px-4 md:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
+          <TextAnimation
+            variant="slideUp"
+            duration={0.4}
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
             Mon Expertise
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
+          </TextAnimation>
+          <TextAnimation
+            variant="slideUp"
+            duration={0.4}
+            delay={0.1}
             className="text-gray-400 text-lg"
           >
             Une maîtrise complète du développement full-stack avec des
             technologies modernes
-          </motion.p>
+          </TextAnimation>
         </div>
 
         <div className="mb-20">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ ease: "easeOut", duration: 0.3 }}
+          <TextAnimation
+            variant="slideUp"
+            duration={0.4}
+            delay={0.15}
             className="flex items-center gap-3 mb-8"
           >
             <Code2 className="text-green-500" size={28} />
             <h3 className="text-3xl font-bold text-white">
               Développement Frontend
             </h3>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </TextAnimation>
+          <CascadeAnimation
+            staggerDelay={0.12}
+            itemDuration={0.5}
+            startDelay={0.2}
+            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {frontendStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </div>
+          </CascadeAnimation>
         </div>
 
         <div className="mb-20">
-          <div className="flex items-center gap-3 mb-8">
+          <TextAnimation
+            variant="slideUp"
+            duration={0.4}
+            delay={0.15}
+            className="flex items-center gap-3 mb-8"
+          >
             <Zap className="text-violet-500" size={28} />
             <h3 className="text-3xl font-bold text-white">Backend</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </TextAnimation>
+          <CascadeAnimation
+            staggerDelay={0.12}
+            itemDuration={0.5}
+            startDelay={0.2}
+            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {backendStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </div>
+          </CascadeAnimation>
         </div>
 
         <div className="mb-20">
-          <div className="flex items-center gap-3 mb-8">
+          <TextAnimation
+            variant="slideUp"
+            duration={0.4}
+            delay={0.15}
+            className="flex items-center gap-3 mb-8"
+          >
             <Smartphone className="text-blue-500" size={28} />
             <h3 className="text-3xl font-bold text-white">
               Développement Mobile
             </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </TextAnimation>
+          <CascadeAnimation
+            staggerDelay={0.12}
+            itemDuration={0.5}
+            startDelay={0.2}
+            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {mobileStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </div>
+          </CascadeAnimation>
         </div>
       </div>
     </section>

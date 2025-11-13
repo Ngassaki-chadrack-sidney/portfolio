@@ -4,12 +4,13 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CountUp from "../CountUp";
+import { TextAnimation } from "@/components/animations/TextAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface ProjetType {
   title: string;
-  description: string;
+  description?: string;
   stack: string[];
   videoUrl: string;
   bgColor: string;
@@ -17,30 +18,48 @@ interface ProjetType {
 
 const projets: ProjetType[] = [
   {
-    title: "E-Commerce Platform",
-    description: "Une plateforme e-commerce complète avec paiement intégré",
-    stack: ["Next.js", "TypeScript", "Stripe"],
+    title: "Reseau social",
+    description:
+      "J'ai creer un reseau social inspirer du reseau social x anciennement nommer Twitter",
+    stack: ["Next.js", "TypeScript", "Adonis"],
     videoUrl: "/videos/project1.mp4",
     bgColor: "#ec4899",
   },
   {
-    title: "Dashboard Analytics",
-    description: "Dashboard analytics en temps réel avec visualisations",
-    stack: ["React", "D3.js", "Node.js"],
+    title: "Mojito",
+    description:
+      "J'ai creer un site de presentation de boison pour la marque Mojito.",
+    stack: ["Next.js", "GSAP"],
+    videoUrl: "/videos/project1.mp4",
+    bgColor: "#ec4899",
+  },
+  {
+    title: "Shadow Flix",
+    description:
+      "Shadow Flix est une application qui permet au utilisateur de consulter des informations concernant des films, series, etc... via l'API the movie DB",
+    stack: ["React Native"],
     videoUrl: "/videos/project2.mp4",
     bgColor: "#8b5cf6",
   },
   {
-    title: "Mobile App",
-    description: "Application mobile cross-platform avec React Native",
-    stack: ["React Native", "Firebase", "Redux"],
+    title: "Signature front",
+    description:
+      "Signature font est une application de signature de document PDF",
+    stack: ["Next JS"],
     videoUrl: "/videos/project3.mp4",
     bgColor: "#3b82f6",
   },
   {
-    title: "SaaS Platform",
-    description: "Plateforme SaaS pour la gestion de projets",
-    stack: ["Next.js", "PostgreSQL", "Prisma"],
+    title: "Application de recette de cuisine",
+    description: "J'ai creer une application de rectte de cuissine.",
+    stack: ["Flutter", "Express JS", "PostgreSQL", "Prisma"],
+    videoUrl: "/videos/project4.mp4",
+    bgColor: "#06b6d4",
+  },
+  {
+    title: "Quiz go",
+    description: "Quiz go est une application de quiz.",
+    stack: ["React Native"],
     videoUrl: "/videos/project4.mp4",
     bgColor: "#06b6d4",
   },
@@ -64,9 +83,13 @@ const ProjetCard = ({
           <h3 className="text-4xl md:text-5xl font-bold mb-4">
             {projet.title}
           </h3>
-          <p className="text-lg md:text-xl mb-6 opacity-90">
-            {projet.description}
-          </p>
+          <div className="text-lg md:text-xl mb-6 opacity-90">
+            {projet.description ? (
+              <p>{projet.description}</p>
+            ) : (
+              <p>Aucune description n'est disponible</p>
+            )}
+          </div>
           <div className="flex flex-wrap gap-3">
             {projet.stack.map((tech, i) => (
               <span
@@ -147,12 +170,21 @@ function Project() {
   return (
     <div className="px-8 md:px-30 mb-8">
       <div className="mb-20">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+        <TextAnimation
+          variant="slideUp"
+          duration={0.4}
+          className="text-4xl md:text-5xl font-bold text-white mb-4"
+        >
           Mes réalisations
-        </h2>
-        <p className="text-xl md:text-2xl text-white">
+        </TextAnimation>
+        <TextAnimation
+          variant="slideUp"
+          duration={0.4}
+          delay={0.1}
+          className="text-xl md:text-2xl text-white"
+        >
           Plus de <CountUp from={0} to={20} /> projets réalisés
-        </p>
+        </TextAnimation>
       </div>
 
       <div ref={cardsRef} className="relative h-screen">

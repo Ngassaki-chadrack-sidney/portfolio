@@ -1,3 +1,4 @@
+import Footer from "@/components/section/footer";
 import Header from "@/components/section/header";
 import { Navigation } from "@/components/section/menuBar";
 import Project from "@/components/section/project";
@@ -10,6 +11,7 @@ export default function Home() {
       <Header />
       <Stack />
       <Project />
+      <Footer />
     </main>
   );
 }
