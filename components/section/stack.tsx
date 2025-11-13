@@ -17,7 +17,7 @@ const frontendStack = [
     label: "CSS3",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-    taux: "95%",
+    taux: "90%",
     level: "Expert",
     description:
       "Animations fluides, layouts flexbox et grid, responsive design, transitions",
@@ -26,8 +26,8 @@ const frontendStack = [
     label: "JavaScript",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-    taux: "95%",
-    level: "Expert",
+    taux: "80%",
+    level: "Avancé",
     description:
       "ES6+, DOM manipulation, async/await, closures, prototypes et programmation fonctionnelle",
   },
@@ -35,8 +35,8 @@ const frontendStack = [
     label: "TypeScript",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-    taux: "90%",
-    level: "Expert",
+    taux: "80%",
+    level: "Avancé",
     description:
       "Typage strict, interfaces complexes, génériques, décorateurs et types avancés",
   },
@@ -44,8 +44,8 @@ const frontendStack = [
     label: "React",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-    taux: "95%",
-    level: "Expert",
+    taux: "78%",
+    level: "Avancé",
     description:
       "Hooks personnalisés, context API, performance optimization, code splitting et lazy loading",
   },
@@ -53,8 +53,8 @@ const frontendStack = [
     label: "Next.js",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-    taux: "95%",
-    level: "Expert",
+    taux: "80%",
+    level: "Avancé",
     description:
       "SSR, SSG, ISR, API routes, middleware, image optimization et déploiement",
   },
@@ -65,7 +65,7 @@ const backendStack = [
     label: "Node.js",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-    taux: "90%",
+    taux: "80%",
     level: "Avancé",
     description:
       "Runtime JavaScript côté serveur, event loop, streams et modules natifs",
@@ -74,7 +74,7 @@ const backendStack = [
     label: "Express",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg",
-    taux: "90%",
+    taux: "85%",
     level: "Avancé",
     description:
       "Framework web minimaliste, middleware, routing avancé et gestion des erreurs",
@@ -92,7 +92,7 @@ const backendStack = [
     label: "MySQL",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
-    taux: "85%",
+    taux: "80%",
     level: "Avancé",
     description:
       "Base de données relationnelle, requêtes complexes, indexation et optimisation",
@@ -101,10 +101,19 @@ const backendStack = [
     label: "PostgreSQL",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-    taux: "85%",
-    level: "Avancé",
+    taux: "70%",
+    level: "Intermediare",
     description:
       "SGBD avancé, JSON, transactions, triggers et fonctionnalités PostGIS",
+  },
+  {
+    label: "Python",
+    iconUrl:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+    taux: "80%",
+    level: "Intermediare",
+    description:
+      "Langage orienté objet, gestion de packages, bibliothèques scientifiques et web",
   },
 ];
 
@@ -113,8 +122,8 @@ const mobileStack = [
     label: "React Native",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-    taux: "85%",
-    level: "Avancé",
+    taux: "90%",
+    level: "Expert",
     description:
       "Applications mobiles cross-platform, navigation native, intégration API",
   },
@@ -122,8 +131,8 @@ const mobileStack = [
     label: "Flutter",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg",
-    taux: "85%",
-    level: "Avancé",
+    taux: "70%",
+    level: "Intermediare",
     description:
       "Framework UI moderne et performant, widgets personnalisés, animations fluides",
   },
@@ -131,8 +140,8 @@ const mobileStack = [
     label: "Dart",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg",
-    taux: "85%",
-    level: "Avancé",
+    taux: "80%",
+    level: "Intermediare",
     description:
       "Langage orienté objet pour Flutter, null safety, async/await et collections",
   },
