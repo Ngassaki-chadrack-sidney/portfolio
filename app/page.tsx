@@ -6,7 +6,7 @@ import Stack from "@/components/section/stack";
 
 export default function Home() {
   return (
-    <main style={{ height: "100vh" }}>
+    <main style={{ height: "100vh" }} className="pt-15">
       <Navigation />
       <Header />
       <Stack />

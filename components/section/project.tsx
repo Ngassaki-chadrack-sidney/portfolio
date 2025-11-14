@@ -115,7 +115,6 @@ const ProjetCard = ({
 };
 
 function Project() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -127,15 +126,15 @@ function Project() {
     cards.forEach((card, index) => {
       gsap.set(card, {
         zIndex: index,
-        y: window.innerHeight,
+        y: window.innerHeight * 0.3,
         scale: 1,
       });
     });
 
     ScrollTrigger.create({
       trigger: cardsRef.current,
-      start: "top top",
-      end: `+=${window.innerHeight * totalCards * 1.5}`,
+      start: "top 30",
+      // end: `+=${window.innerHeight * totalCards * 1.5}`,
       pin: true,
       scrub: 1,
       onUpdate: (self) => {
@@ -168,8 +167,8 @@ function Project() {
   }, []);
 
   return (
-    <div className="px-8 md:px-30 mb-8">
-      <div className="mb-20">
+    <div id="projets" className="px-8 md:px-30 mb-8">
+      <div className="mb-8">
         <TextAnimation
           variant="slideUp"
           duration={0.4}
@@ -192,8 +191,6 @@ function Project() {
           <ProjetCard key={index} projet={projet} index={index} />
         ))}
       </div>
-
-      <div className="h-screen"></div>
     </div>
   );
 }

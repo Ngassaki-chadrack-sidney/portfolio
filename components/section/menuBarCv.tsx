@@ -1,9 +1,9 @@
 import StaggeredMenu from "@/components/StaggeredMenu";
 
 const menuItems = [
-  { label: "Portfolio", ariaLabel: "Portfolio", link: "#header" },
-  { label: "Stack", ariaLabel: "Stack", link: "#stack" },
-  { label: "Projets", ariaLabel: "Projets", link: "#projets" },
+  { label: "Portfolio", ariaLabel: "Portfolio", link: "/" },
+  { label: "Stack", ariaLabel: "Stack", link: "/" },
+  { label: "Projets", ariaLabel: "Projets", link: "/" },
   { label: "CV", ariaLabel: "CV", link: "/cv" },
 ];
 
@@ -13,7 +13,7 @@ const socialMedia = [
   { label: "WhatsApp", link: "https://whatsapp.com" },
 ];
 
-export const Navigation = () => {
+export const NavigationCv = () => {
   return (
     <StaggeredMenu
       position="right"

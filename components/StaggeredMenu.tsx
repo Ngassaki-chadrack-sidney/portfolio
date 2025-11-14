@@ -416,9 +416,20 @@ const StaggeredMenuContent = ({
     onMenuClose,
   ]);
 
-  const handleLinkClick = useCallback(() => {
-    closeMenu();
-  }, [closeMenu]);
+  const handleLinkClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      const href = e.currentTarget.getAttribute("href");
+      if (href && href.startsWith("/") && !href.startsWith("#")) {
+        // Déclencher la transition de page
+        window.dispatchEvent(
+          new CustomEvent("pageTransition", { detail: href })
+        );
+        e.preventDefault();
+      }
+      closeMenu();
+    },
+    [closeMenu]
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -573,7 +584,7 @@ const StaggeredMenuContent = ({
                       href={it.link}
                       aria-label={it.ariaLabel}
                       data-index={idx + 1}
-                      onClick={handleLinkClick}
+                      onClick={(e) => handleLinkClick(e)}
                     >
                       <span className="sm-panel-itemLabel inline-block [transform-origin:50%_100%] will-change-transform">
                         {it.label}
@@ -614,7 +625,7 @@ const StaggeredMenuContent = ({
                         target="_blank"
                         rel="noopener noreferrer"
                         className="sm-socials-link text-[1.2rem] font-medium text-[#111] no-underline relative inline-block py-[2px] transition-[color,opacity] duration-300 ease-linear"
-                        onClick={handleLinkClick}
+                        onClick={(e) => handleLinkClick(e)}
                       >
                         {s.label}
                       </a>
