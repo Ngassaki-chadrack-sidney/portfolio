@@ -131,7 +131,7 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                 // duration={0.4}
                 delay={0.4 + idx * 0.05}
               >
-                <Badge className="bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700 transition-colors">
+                <Badge className="bg-blue-500 text-white px-2 py-1 border-gray-700 hover:bg-gray-700 transition-colors">
                   {tech}
                 </Badge>
               </TextAnimation>

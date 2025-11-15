@@ -5,22 +5,22 @@ import photo from "../../public/profile.jpeg";
 import { motion } from "framer-motion";
 import { TextAnimation } from "@/components/animations/TextAnimation";
 import { GlowEffect } from "../ui/glow-effect";
+import localFont from "next/font/local";
+
+const customFont = localFont({
+  src: "../../public/font-italic.ttf",
+});
 
 function Header() {
   return (
     <div id="header" className="w-full flex justify-center">
       <section className="max-w-7xl flex flex-col lg:flex-row justify-between items-center gap-6 lg:gap-12 py-8 lg:py-0 overflow-x-hidden">
-        <div
-          // initial={{ x: -900 }}
-          // animate={{ x: 0 }}
-          // transition={{ ease: "backInOut", duration: 0.5 }}
-          className="space-y-4 w-full lg:w-1/2"
-        >
+        <div className="space-y-4 w-full lg:w-1/2">
           <TextAnimation
             variant="slideUp"
             duration={0.4}
             delay={0.5}
-            className="text-2xl md:text-3xl lg:text-5xl font-bold bg-linear-to-r from-blue-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent"
+            className={`${customFont.className} text-2xl md:text-3xl lg:text-5xl font-bold bg-linear-to-r from-blue-600 to-cyan-50 bg-clip-text text-transparent`}
           >
             NGASSAKI Chadrack
           </TextAnimation>

@@ -16,7 +16,7 @@ export const experiences: Experience[] = [
     id: "exp-webtinix",
     poste: "Développeur web",
     entreprise: "Webtinix",
-    type: "Freelance",
+    type: "CDI",
     dateDebut: "2025-06",
     dateFin: "2025-11",
     actuel: false,
@@ -28,7 +28,7 @@ export const experiences: Experience[] = [
       "Optimisation des performances et de l'expérience utilisateur",
     ],
     technologies: ["Next.js", "React", "TypeScript", "PrestaShop", "Figma"],
-    localisation: "CDI",
+    localisation: "Brazzaville",
   },
 ];
 

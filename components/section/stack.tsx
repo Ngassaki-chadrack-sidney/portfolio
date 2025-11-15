@@ -4,6 +4,7 @@ import { Code2, Smartphone, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { CascadeAnimation } from "@/components/animations/CascadeAnimation";
 import { TextAnimation } from "@/components/animations/TextAnimation";
+import { BorderTrail } from "../ui/border-trail";
 
 const frontendStack = [
   {
@@ -199,6 +200,10 @@ const StackCard = ({
             {taux} maîtrise
           </p>
         </div>
+        <BorderTrail
+          className="bg-linear-to-r from-blue-500 via-cyan-500 to-green-500 rounded-2xl"
+          size={150}
+        />
       </div>
     </div>
   );

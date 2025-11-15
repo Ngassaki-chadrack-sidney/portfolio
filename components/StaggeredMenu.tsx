@@ -70,7 +70,7 @@ const StaggeredMenuContent = ({
 
   const textInnerRef = useRef<HTMLSpanElement>(null);
   const textWrapRef = useRef<HTMLSpanElement>(null);
-  const [textLines, setTextLines] = useState(["Menu", "Close"]);
+  const [textLines, setTextLines] = useState(["Menu", "Fermer"]);
 
   const openTlRef = useRef<any>(null);
   const closeTweenRef = useRef<any>(null);
@@ -352,14 +352,14 @@ const StaggeredMenuContent = ({
 
     textCycleAnimRef.current?.kill();
 
-    const currentLabel = opening ? "Menu" : "Close";
-    const targetLabel = opening ? "Close" : "Menu";
+    const currentLabel = opening ? "Menu" : "Fermer";
+    const targetLabel = opening ? "Fermer" : "Menu";
     const cycles = 3;
 
     const seq = [currentLabel];
     let last = currentLabel;
     for (let i = 0; i < cycles; i++) {
-      last = last === "Menu" ? "Close" : "Menu";
+      last = last === "Menu" ? "Fermer" : "Menu";
       seq.push(last);
     }
     if (last !== targetLabel) seq.push(targetLabel);
@@ -517,7 +517,7 @@ const StaggeredMenuContent = ({
           <button
             ref={toggleBtnRef}
             className="sm-toggle relative inline-flex items-center gap-[0.3rem] bg-transparent border-0 cursor-pointer text-[#e9e9ef] font-medium leading-none overflow-visible pointer-events-auto"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={open}
             aria-controls="staggered-menu-panel"
             onClick={toggleMenu}

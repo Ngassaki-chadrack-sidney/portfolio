@@ -2,6 +2,7 @@
 
 import { TextAnimation } from "../animations";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 function Footer() {
   const socialLinks = [
@@ -32,9 +33,15 @@ function Footer() {
             className="text-white text-sm md:text-base"
           >
             <p>© 2025 Chadrack Hermann. Tous droits réservés.</p>
+            <p>
+              Ce site es cours de developpement donc il se pourrais que toutes
+              les informations me concernant ne soit pas au complet tels que les
+              projtes etc... <br />
+              Merci pour votre compréhension{" "}
+            </p>
           </TextAnimation>
 
-          <div className="flex flex-col items-center md:items-end gap-4">
+          <div className="flex flex-col items-center md:items-end">
             <TextAnimation
               variant="slideUp"
               duration={0.4}
@@ -47,25 +54,18 @@ function Footer() {
               {socialLinks.map((link, index) => {
                 const Icon = link.icon;
                 return (
-                  <TextAnimation
-                    key={link.name}
-                    variant="slideUp"
-                    duration={0.4}
-                    delay={0.15 + index * 0.05}
+                  <motion.a
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-white justify-center w-12 h-12 rounded-full hover:text-blue-500 cursor-pointer tran"
+                    aria-label={link.name}
                   >
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center text-white justify-center w-12 h-12 rounded-full bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-gray-600 transition-all duration-300 group"
-                      aria-label={link.name}
-                    >
-                      <Icon
-                        size={20}
-                        className="text-white group-hover:text-white transition-colors duration-300"
-                      />
-                    </a>
-                  </TextAnimation>
+                    <Icon className="hover:text-blue-500 transition-colors" />
+                  </motion.a>
                 );
               })}
             </div>

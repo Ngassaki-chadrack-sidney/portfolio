@@ -57,16 +57,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "NGASSAKI Chadrack | Développeur Full-Stack & Mobile",
-    description:
-      "Développeur Full-Stack & Mobile passionné. Je crée des solutions performantes et innovantes.",
-    images: ["https://ngassaki-chadrack.com/og-image.png"],
-  },
-  alternates: {
-    canonical: "https://ngassaki-chadrack.com",
-  },
 };
 
 export const viewport: Viewport = {
