@@ -3,9 +3,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import CountUp from "../CountUp";
-import { TextAnimation } from "@/components/animations/TextAnimation";
-import { BorderTrail } from "../ui/border-trail";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +11,7 @@ interface ProjetType {
   description?: string;
   stack: string[];
   videoUrl: string;
+  color: string;
 }
 
 const projets: ProjetType[] = [
@@ -23,6 +21,7 @@ const projets: ProjetType[] = [
       "J'ai creer un reseau social inspirer du reseau social x anciennement nommer Twitter",
     stack: ["Next.js", "TypeScript", "Adonis"],
     videoUrl: "/videos/project1.mp4",
+    color: "#2C3E50",
   },
   {
     title: "Mojito",
@@ -30,6 +29,7 @@ const projets: ProjetType[] = [
       "J'ai creer un site de presentation de boison pour la marque Mojito.",
     stack: ["Next.js", "GSAP"],
     videoUrl: "/videos/project1.mp4",
+    color: "#34495E",
   },
   {
     title: "Shadow Flix",
@@ -37,6 +37,7 @@ const projets: ProjetType[] = [
       "Shadow Flix est une application qui permet au utilisateur de consulter des informations concernant des films, series, etc... via l'API the movie DB",
     stack: ["React Native"],
     videoUrl: "/videos/project2.mp4",
+    color: "#1C2833",
   },
   {
     title: "Signature front",
@@ -44,18 +45,21 @@ const projets: ProjetType[] = [
       "Signature font est une application de signature de document PDF",
     stack: ["Next JS"],
     videoUrl: "/videos/project3.mp4",
+    color: "#273746",
   },
   {
     title: "Application de recette de cuisine",
     description: "J'ai creer une application de rectte de cuissine.",
     stack: ["Flutter", "Express JS", "PostgreSQL", "Prisma"],
     videoUrl: "/videos/project4.mp4",
+    color: "#1B2631",
   },
   {
     title: "Quiz go",
     description: "Quiz go est une application de quiz.",
     stack: ["React Native"],
     videoUrl: "/videos/project4.mp4",
+    color: "#212F3C",
   },
 ];
 
@@ -68,8 +72,9 @@ const ProjetCard = ({
 }) => {
   return (
     <div
-      className="projet-card bg-[#1E1E1E] absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl rounded-3xl overflow-hidden shadow-2xl"
+      className="projet-card absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl rounded-3xl overflow-hidden shadow-2xl"
       data-index={index}
+      style={{ backgroundColor: projet.color }}
     >
       <div className="flex flex-col md:flex-row gap-8 p-8 md:p-12 min-h-[500px]">
         <div className="flex-1 flex flex-col justify-center text-white">
@@ -87,7 +92,7 @@ const ProjetCard = ({
             {projet.stack.map((tech, i) => (
               <span
                 key={i}
-                className="px-4 py-2 bg-blue-500 backdrop-blur-sm rounded-full text-sm font-medium"
+                className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium"
               >
                 {tech}
               </span>
@@ -105,13 +110,11 @@ const ProjetCard = ({
           />
         </div>
       </div>
-
-      <BorderTrail className="bg-linear-to-r from-blue-500 via-cyan-500 to-green-500 rounded-2xl" size={150} />
     </div>
   );
 };
 
-function Project() {
+export default function Project() {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -120,40 +123,50 @@ function Project() {
     const cards = gsap.utils.toArray(".projet-card") as HTMLElement[];
     const totalCards = cards.length;
 
-    // Initialiser toutes les cartes en dehors de la vue
     cards.forEach((card, index) => {
-      gsap.set(card, {
-        zIndex: index,
-        y: 50, // Positionner légèrement en bas pour l'animation
-        scale: 0.9,
-        opacity: 1,
-      });
+      if (index === 0) {
+        gsap.set(card, {
+          zIndex: 0,
+          y: 0,
+          scale: 1,
+          opacity: 1,
+        });
+      } else {
+        gsap.set(card, {
+          zIndex: index,
+          y: window.innerHeight,
+          scale: 0.95,
+          opacity: 0,
+        });
+      }
     });
 
     ScrollTrigger.create({
       trigger: cardsRef.current,
-      start: "top 30",
-      end: `+=${window.innerHeight * totalCards * 1.5}`,
+      start: "top top",
+      end: `+=${window.innerHeight * (totalCards - 1)}`,
       pin: true,
       scrub: 1,
       onUpdate: (self) => {
         const progress = self.progress;
-        const progressPerCard = 1 / totalCards;
+        const progressPerCard = 1 / (totalCards - 1);
 
         cards.forEach((card, index) => {
-          const cardStart = index * progressPerCard;
+          if (index === 0) return;
 
-          let cardProgress = (progress - cardStart) / progressPerCard;
+          const cardStart = (index - 1) * progressPerCard;
+          const cardEnd = index * progressPerCard;
+
+          let cardProgress = (progress - cardStart) / (cardEnd - cardStart);
           cardProgress = Math.max(0, Math.min(1, cardProgress));
 
-          const targetY = index * 30;
-          const currentY =
-            window.innerHeight - (window.innerHeight - targetY) * cardProgress;
+          const targetY = index * 20;
+          const currentY = window.innerHeight - (window.innerHeight - targetY) * cardProgress;
 
           gsap.to(card, {
             y: currentY,
-            scale: 1,
-            opacity: 1,
+            scale: 0.95 + 0.05 * cardProgress,
+            opacity: cardProgress,
             duration: 0,
             ease: "none",
           });
@@ -169,21 +182,12 @@ function Project() {
   return (
     <div id="projets" className="px-8 md:px-30 mb-8">
       <div className="mb-8">
-        <TextAnimation
-          variant="slideUp"
-          duration={0.4}
-          className="text-4xl md:text-5xl font-bold text-white mb-4"
-        >
+        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
           Mes réalisations
-        </TextAnimation>
-        <TextAnimation
-          variant="slideUp"
-          duration={0.4}
-          delay={0.1}
-          className="text-xl md:text-2xl text-white"
-        >
-          Plus de <CountUp from={0} to={20} /> projets réalisés
-        </TextAnimation>
+        </h2>
+        <p className="text-xl md:text-2xl text-white">
+          Plus de 20 projets réalisés
+        </p>
       </div>
 
       <div ref={cardsRef} className="relative h-screen">
@@ -194,5 +198,3 @@ function Project() {
     </div>
   );
 }
-
-export default Project;
