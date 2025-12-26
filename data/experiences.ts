@@ -18,7 +18,7 @@ export const experiences: Experience[] = [
     entreprise: "Webtinix",
     type: "CDI",
     dateDebut: "2025-06",
-    dateFin: "2025-11",
+    dateFin: "2026-01",
     actuel: false,
     missions: [
       "Transformation de maquettes Figma en code avec Next.js",

@@ -1,3 +1,4 @@
+import Experiences from "@/components/section/experiences";
 import Footer from "@/components/section/footer";
 import Header from "@/components/section/header";
 import { Navigation } from "@/components/section/menuBar";
@@ -11,7 +12,8 @@ export default function Home() {
       <Header />
       <Stack />
       <Project />
-      <Footer />
+      <Experiences />
+      <Footer key={"1"} />
     </main>
   );
 }

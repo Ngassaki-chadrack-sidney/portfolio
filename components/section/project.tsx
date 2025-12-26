@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import CopyText from "../animations/CopyText";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,14 +87,14 @@ const ProjetCard = ({
             {projet.description ? (
               <p>{projet.description}</p>
             ) : (
-              <p>Aucune description n'est disponible</p>
+              <p>Aucune description n&apos;est disponible</p>
             )}
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-4 gap-3">
             {projet.stack.map((tech, i) => (
               <span
                 key={i}
-                className="px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium"
+                className="px-4 py-2 bg-blue-500 backdrop-blur-sm rounded-full text-sm text-center font-medium"
               >
                 {tech}
               </span>
@@ -102,7 +104,7 @@ const ProjetCard = ({
         <div className="flex-1 flex items-center justify-center">
           <video
             src={projet.videoUrl}
-            className="w-full h-full object-cover aspect-video bg-white/10 backdrop-blur-sm rounded-2xl border-4 border-white/20 flex items-center justify-center overflow-hidden"
+            className="w-full h-full object-cover aspect-video rounded-xl flex items-center justify-center overflow-hidden"
             autoPlay
             muted
             loop
@@ -136,7 +138,7 @@ export default function Project() {
           zIndex: index,
           y: window.innerHeight,
           scale: 0.95,
-          opacity: 0,
+          opacity: 1,
         });
       }
     });
@@ -161,7 +163,8 @@ export default function Project() {
           cardProgress = Math.max(0, Math.min(1, cardProgress));
 
           const targetY = index * 20;
-          const currentY = window.innerHeight - (window.innerHeight - targetY) * cardProgress;
+          const currentY =
+            window.innerHeight - (window.innerHeight - targetY) * cardProgress;
 
           gsap.to(card, {
             y: currentY,
@@ -181,19 +184,65 @@ export default function Project() {
 
   return (
     <div id="projets" className="px-8 md:px-30 mb-8">
-      <div className="mb-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          Mes réalisations
-        </h2>
-        <p className="text-xl md:text-2xl text-white">
-          Plus de 20 projets réalisés
-        </p>
+      <div className="flex flex-col space-y-4">
+        <CopyText>
+          <h3 className="text-4xl font-bold">Projets réaliser</h3>
+        </CopyText>
+        <CopyText>
+          <p>
+            Voici quelques projets personnel sur lesquels j&apos;ai eu a faire
+            durant mon temps libre.
+          </p>
+        </CopyText>
       </div>
 
-      <div ref={cardsRef} className="relative h-screen">
+      {/* <div ref={cardsRef} className="relative h-screen">
         {projets.map((projet, index) => (
           <ProjetCard key={index} projet={projet} index={index} />
         ))}
+      </div> */}
+
+      <div className="space-y-3">
+        <div className="flex flex-col justify-center items-center justify-items-center p-4 space-y-3">
+          {projets.map((el, index) => (
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              key={index}
+              className="flex gap-3 w-5xl h-86 bg-gray-900 rounded items-start p-12"
+              style={{ backgroundColor: el.color ? el.color : "transparent" }}
+            >
+              <div className="w-1/2 space-y-3">
+                <CopyText>
+                  <h4 className="text-xl font-bold">{el.title}</h4>
+                </CopyText>
+                <CopyText>
+                  <p className="italic">{el.description}</p>
+                </CopyText>
+
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                {el.stack.map((ol, index) => (
+                  <div
+                    key={index}
+                    className="bg-blue-500 text-white rounded-full flex justify-center items-center px-2"
+                  >
+                    <span className="text-center text-base">{ol}</span>
+                  </div>
+                ))}
+                </div>
+              </div>
+              <div>
+                <video
+                  className="aspect-video h-70 w-1/2 rounded-lg"
+                  src={el.videoUrl}
+                  autoPlay
+                  playsInline
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
