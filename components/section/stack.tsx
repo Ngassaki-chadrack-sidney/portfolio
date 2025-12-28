@@ -1,9 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { CascadeAnimation } from "@/components/animations/CascadeAnimation";
-import { BorderTrail } from "../ui/border-trail";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import CopyText from "../animations/CopyText";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 const frontendStack = [
   {
@@ -155,6 +161,7 @@ interface StackItemProps {
   taux: string;
   level: string;
   description: string;
+  isFeatured?: boolean;
 }
 
 const StackCard = ({
@@ -163,103 +170,158 @@ const StackCard = ({
   taux,
   level,
   description,
+  isFeatured,
 }: StackItemProps) => {
-  return (
-    <div className="relative group h-full">
-      <div className="absolute h-[350px] inset-0 bg-gray-800 rounded-xl -z-10" />
-      <div className="relative bg-gray-900 h-[350px] rounded-xl p-6 border-gray-700 shadow shadow-xl hover:shadow-blue-500 transition-all flex flex-col justify-between overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-gray-800 to-gray-900 opacity-0 group-hover:opacity-50 transition-opacity -z-10" />
+  const cardRef = useRef<HTMLDivElement>(null);
+  const scanLineRef = useRef<HTMLDivElement>(null);
 
-        <div className="relative z-10">
-          <div className="flex items-cente justify-center relative justify-between mb-4">
+  // 1. Gestion de la lueur qui suit la souris (Framer Motion)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-6 transition-all hover:border-blue-500/50 ${
+        isFeatured ? "md:col-span-2 md:row-span-2" : ""
+      }`}
+    >
+      {/* Effet de lueur radiale */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              350px circle at ${mouseX}px ${mouseY}px,
+              rgba(59, 130, 246, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      {/* Ligne de scan GSAP */}
+      <div
+        ref={scanLineRef}
+        className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent z-0 pointer-events-none opacity-0 group-hover:opacity-100"
+      />
+
+      <div className="relative z-10">
+        <div className="flex items-start justify-between mb-6">
+          <div className="rounded-xl">
             <img
               src={iconUrl}
               alt={label}
-              className="w-35 h-35 object-contain filter saturate-150"
-              loading="lazy"
+              className="w-20 h-20 object-contain"
             />
-            <span className="text-xs font-semibold absolute top-2 right-0 text-white bg-blue-700 px-3 py-1 rounded-full">
-              {level}
-            </span>
           </div>
-          <h4 className="font-bold text-lg mb-2">{label}</h4>
-          <p className="text-sm mb-4 line-clamp-3">
-            {description}
-          </p>
+          <span className="text-[10px] font-bold text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-tighter">
+            {level}
+          </span>
         </div>
 
-        <div className="relative z-10">
-          <div className="w-full bg-gray-600 rounded-full h-2 overflow-hidden">
-            <div
-              className="bg-white h-2 rounded-full transition-all duration-500"
-              style={{ width: taux }}
-            />
-          </div>
-          {/* <p className="text-xs text-white font-semibold mt-2">
-            {taux} maîtrise
-          </p> */}
-        </div>
-        {/* <BorderTrail
-          className="bg-linear-to-r from-blue-500 via-cyan-500 to-green-500 rounded-2xl"
-          size={150}
-        /> */}
+        <h4 className="font-bold text-xl text-white mb-2 group-hover:text-blue-400 transition-colors">
+          {label}
+        </h4>
+        <p className="leading-relaxed line-clamp-3 mb-4">
+          {description}
+        </p>
       </div>
-    </div>
+
+      <div className="relative z-10 space-y-2">
+        <div className="flex justify-between text-[10px] font-mono text-gray-500 uppercase">
+          <span>Expertise</span>
+          <span>{taux}</span>
+        </div>
+        <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: taux }}
+            className="h-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]"
+          />
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
 function Stack() {
   return (
-    <section id="stack" className="w-full py-20 px-4 md:px-8 lg:px-16">
+    <section
+      id="stack"
+      className="w-full py-24 px-6 md:px-12 lg:px-20 bg-black"
+    >
       <div className="max-w-7xl mx-auto">
-        <div className="mb-16">
-          <CopyText>
-            <h3 className="text-4xl md:text-5xl font-bold">Ma stack</h3>
+        {/* TEXTE D'INTRODUCTION */}
+        <div className="mb-20 space-y-4">
+          <CopyText delay={0.1}>
+            <h2 className="text-blue-500 font-bold tracking-widest uppercase text-sm">
+              Mon Arsenal
+            </h2>
           </CopyText>
-          <CopyText>
-            <p>
-              Durant mon parcour de dévéloppeur j&apos;ai eu location de travailler sur ces technologies
+          <CopyText delay={0.2}>
+            <h3 className="text-4xl md:text-5xl font-extrabold text-white">
+              Ma Stack{" "}
+              <span className="text-blue-600 text-outline">Technique</span>
+            </h3>
+          </CopyText>
+          <CopyText delay={0.3}>
+            <p className="max-w-2xl text-gray-400 text-lg leading-relaxed">
+              Durant mon parcours de développeur, j&apos;ai eu l&apos;occasion
+              de travailler sur une multitude de technologies. Aujourd&apos;hui,
+              je me concentre sur des outils qui permettent de créer des
+              produits **rapides, scalables et centrés sur l&apos;utilisateur.**
             </p>
           </CopyText>
         </div>
 
-        <div className="mb-7">
-          <CascadeAnimation
-            staggerDelay={0.12}
-            itemDuration={0.5}
-            startDelay={0.2}
-            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+        {/* --- FRONTEND --- */}
+        <div className="mb-16">
+          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+            Frontend Development{" "}
+            <div className="h-[1px] flex-grow bg-white/10" />
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {frontendStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </CascadeAnimation>
+          </div>
         </div>
 
-        <div className="mb-7">
-          <CascadeAnimation
-            staggerDelay={0.12}
-            itemDuration={0.5}
-            startDelay={0.2}
-            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+        {/* --- BACKEND --- */}
+        <div className="mb-16">
+          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+            Backend & Databases{" "}
+            <div className="h-[1px] flex-grow bg-white/10" />
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {backendStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </CascadeAnimation>
+          </div>
         </div>
 
-        <div className="mb-7">
-          <CascadeAnimation
-            staggerDelay={0.12}
-            itemDuration={0.5}
-            startDelay={0.2}
-            containerClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+        {/* --- MOBILE --- */}
+        <div className="mb-16">
+          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+            Mobile Development <div className="h-[1px] flex-grow bg-white/10" />
+          </h4>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mobileStack.map((item) => (
               <StackCard key={item.label} {...item} />
             ))}
-          </CascadeAnimation>
+          </div>
         </div>
       </div>
     </section>

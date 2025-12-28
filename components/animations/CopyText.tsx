@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useCallback } from "react";
 import gsap from "gsap";
 import { SplitText, ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
@@ -14,128 +14,105 @@ interface CopyTextProps {
   duration?: number;
   delay?: number;
   stagger?: number;
+  className?: string; // Ajout pour garder tes styles CSS
 }
 
 function CopyText({
   children,
   animateOnScroll = true,
   blockColor = "#3b82f6",
-  duration = 0.75,
+  duration = 0.6,
   delay = 0,
-  stagger = 0.15,
+  stagger = 0.1,
+  className = "",
 }: CopyTextProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const splitRef = useRef<any[]>([]);
-  const lineRef = useRef<HTMLElement[]>([]);
-  const blockRef = useRef<HTMLElement[]>([]);
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
 
-      splitRef.current = [];
-      lineRef.current = [];
-      blockRef.current = [];
+      // 1. On split le texte en lignes
+      const childElements =
+        containerRef.current.children.length > 0
+          ? Array.from(containerRef.current.children)
+          : [containerRef.current];
 
-      let elements: Element[] = [];
-      if (containerRef.current.hasAttribute("data-copy-wrapper")) {
-        elements = Array.from(containerRef.current.children);
-      } else {
-        elements = [containerRef.current];
-      }
-
-      elements.forEach((element) => {
-        const split = SplitText.create(element, {
+      const splits = childElements.map((el) => {
+        return new SplitText(el, {
           type: "lines",
-          linesClass: "block-line++",
-          lineThreshold: 0.1,
-        });
-
-        splitRef.current.push(split);
-
-        split.lines.forEach((line: HTMLElement) => {
-          const wrapper = document.createElement("div");
-          wrapper.className = "block-line-wrapper";
-          wrapper.style.overflow = "hidden";
-          wrapper.style.position = "relative";
-
-          line.parentNode?.insertBefore(wrapper, line);
-          wrapper.appendChild(line);
-
-          const block = document.createElement("div");
-          block.className = "block-reveal";
-          block.style.backgroundColor = blockColor;
-          block.style.position = "absolute";
-          block.style.top = "0";
-          block.style.left = "0";
-          block.style.width = "100%";
-          block.style.height = "100%";
-          wrapper.appendChild(block);
-
-          lineRef.current.push(line);
-          blockRef.current.push(block);
+          linesClass: "split-line",
         });
       });
 
-      gsap.set(lineRef.current, { opacity: 0 });
-      gsap.set(blockRef.current, { scaleX: 0, transformOrigin: "left center" });
+      const allLines = splits.flatMap((s) => s.lines);
 
-      const createBlockRevealAnimation = (
-        block: HTMLElement,
-        line: HTMLElement,
-        index: number
-      ) => {
-        const tl = gsap.timeline({ delay: delay + index * stagger });
-        tl.to(block, { scaleX: 1, duration: duration, ease: "power4.inOut" });
-        tl.set(line, { opacity: 1 });
-        tl.set(block, { transformOrigin: "right center" });
-        tl.to(block, { scaleX: 0, duration: duration, ease: "power4.inOut" });
-        return tl;
-      };
+      // 2. Création des wrappers et des blocs de révélation de manière propre
+      const animations = allLines.map((line) => {
+        // On entoure chaque ligne d'un wrapper "overflow hidden"
+        const wrapper = document.createElement("div");
+        wrapper.style.position = "relative";
+        wrapper.style.overflow = "hidden";
+        wrapper.style.display = "block"; // Important pour le layout
+        wrapper.className = "line-wrapper";
 
+        line.parentNode?.insertBefore(wrapper, line);
+        wrapper.appendChild(line);
+
+        // Création du bloc de couleur (Reveal Block)
+        const block = document.createElement("div");
+        block.style.position = "absolute";
+        block.style.top = "0";
+        block.style.left = "0";
+        block.style.width = "100%";
+        block.style.height = "100%";
+        block.style.backgroundColor = blockColor;
+        block.style.transformOrigin = "left center";
+        block.style.transform = "scaleX(0)";
+        wrapper.appendChild(block);
+
+        // Timeline pour cette ligne précise
+        const tl = gsap.timeline({ paused: true });
+        tl.to(block, { scaleX: 1, duration: duration, ease: "power3.inOut" })
+          .set(line, { opacity: 1 }) // Le texte est invisible au début (via CSS ou GSAP)
+          .set(block, { transformOrigin: "right center" })
+          .to(block, { scaleX: 0, duration: duration, ease: "power3.inOut" });
+
+        return { tl, wrapper };
+      });
+
+      // Rendre le texte invisible initialement pour éviter le flash
+      gsap.set(allLines, { opacity: 0 });
+
+      // 3. Animation au scroll ou immédiate
       if (animateOnScroll) {
-        blockRef.current.forEach((block, index) => {
-          const tl = createBlockRevealAnimation(
-            block,
-            lineRef.current[index],
-            index
-          );
-          tl.pause();
-
-          ScrollTrigger.create({
-            trigger: containerRef.current,
-            start: "top 90%",
-            once: true,
-            onEnter: () => tl.play(),
-          });
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top 85%",
+          onEnter: () => {
+            animations.forEach((anim, i) => {
+              gsap.delayedCall(delay + i * stagger, () => anim.tl.play());
+            });
+          },
+          once: true,
         });
       } else {
-        blockRef.current.forEach((block, index) => {
-          createBlockRevealAnimation(block, lineRef.current[index], index);
+        animations.forEach((anim, i) => {
+          gsap.delayedCall(delay + i * stagger, () => anim.tl.play());
         });
       }
 
+      // Nettoyage lors du démontage
       return () => {
-        splitRef.current.forEach((split) => split?.revert());
-        const wrappers = containerRef.current?.querySelectorAll(
-          ".block-line-wrapper"
-        );
-        wrappers?.forEach((wrapper) => {
-          if (wrapper.parentNode && wrapper.firstChild) {
-            wrapper.parentNode.insertBefore(wrapper.firstChild, wrapper);
-            wrapper.remove();
-          }
-        });
+        splits.forEach((s) => s.revert());
+        ScrollTrigger.getAll().forEach((st) => st.kill());
       };
     },
-    {
-      scope: containerRef,
-      dependencies: [animateOnScroll, delay, blockColor, stagger, duration],
-    }
+    { scope: containerRef, dependencies: [children] }
   );
 
   return (
-    <div ref={containerRef} data-copy-wrapper>
+    <div ref={containerRef} className={`relative ${className}`}>
       {children}
     </div>
   );

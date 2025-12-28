@@ -1,13 +1,22 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import CopyText from "../animations/CopyText";
-import { motion } from "framer-motion";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiReact,
+  SiFlutter,
+  SiPostgresql,
+  SiExpress,
+} from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// --- Données ---
 interface ProjetType {
   title: string;
   description?: string;
@@ -16,234 +25,248 @@ interface ProjetType {
   color: string;
 }
 
+// J'ai ajouté des icônes pour rendre la stack plus visuelle
+const iconMap: { [key: string]: React.ReactNode } = {
+  "Next.js": <SiNextdotjs />,
+  TypeScript: <SiTypescript />,
+  "React Native": <SiReact />,
+  Flutter: <SiFlutter />,
+  PostgreSQL: <SiPostgresql />,
+  "Express JS": <SiExpress />,
+  // Ajoute les autres icônes manquantes si besoin (Adonis, Prisma, etc.)
+};
+
 const projets: ProjetType[] = [
   {
-    title: "Reseau social",
+    title: "Réseau Social X-Clone",
     description:
-      "J'ai creer un reseau social inspirer du reseau social x anciennement nommer Twitter",
+      "Conception d'une plateforme sociale moderne inspirée de Twitter/X, mettant l'accent sur les interactions en temps réel et une architecture backend évolutive.",
     stack: ["Next.js", "TypeScript", "Adonis"],
-    videoUrl: "/videos/project1.mp4",
-    color: "#2C3E50",
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763459208/nwSy6DrQfj_sawc9i.mp4", // Assure-toi que ces vidéos existent
+    color: "#0f172a", // Bleu nuit très sombre
   },
   {
-    title: "Mojito",
+    title: "Mojito Brand",
     description:
-      "J'ai creer un site de presentation de boison pour la marque Mojito.",
-    stack: ["Next.js", "GSAP"],
-    videoUrl: "/videos/project1.mp4",
-    color: "#34495E",
+      "Site vitrine immersif pour une marque de boisson, utilisant des animations GSAP avancées pour une expérience utilisateur rafraîchissante et dynamique.",
+    stack: ["Next.js", "GSAP", "TypeScript"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458344/replique_d_un_site_awwward_pkzvoi.mp4",
+    color: "#052e16", // Vert forêt profond
+  },
+  {
+    title: "Copy de notion",
+    description: "Application de prise de note simulaire a notion",
+    stack: ["Next.js", "TypeScript"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458393/notion_app_dj4drr.mp4",
+    color: "#701a75",
   },
   {
     title: "Shadow Flix",
     description:
-      "Shadow Flix est une application qui permet au utilisateur de consulter des informations concernant des films, series, etc... via l'API the movie DB",
-    stack: ["React Native"],
-    videoUrl: "/videos/project2.mp4",
-    color: "#1C2833",
+      "Application mobile cross-platform permettant d'explorer une vaste base de données de films et séries via l'API TMDB, avec une interface fluide.",
+    stack: ["React Native", "TypeScript"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458900/20250621-2042-00.2174813_gv38kx.mp4",
+    color: "#312e81", // Indigo profond
   },
   {
-    title: "Signature front",
+    title: "Signature Front",
     description:
-      "Signature font est une application de signature de document PDF",
-    stack: ["Next JS"],
+      "Solution SaaS sécurisée pour la signature électronique de documents PDF, intégrant des fonctionnalités de workflow et de validation.",
+    stack: ["Next.js", "TypeScript"],
     videoUrl: "/videos/project3.mp4",
-    color: "#273746",
+    color: "#4c0519", // Rose/Rouge profond
   },
   {
-    title: "Application de recette de cuisine",
-    description: "J'ai creer une application de rectte de cuissine.",
-    stack: ["Flutter", "Express JS", "PostgreSQL", "Prisma"],
-    videoUrl: "/videos/project4.mp4",
-    color: "#1B2631",
+    title: "Chef's Recipe App",
+    description:
+      "Application mobile complète de gestion de recettes de cuisine, avec une base de données robuste et une interface utilisateur intuitive.",
+    stack: ["Flutter", "Express JS", "PostgreSQL"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458336/Screen_Recording_2025-10-03_155250_mjxfjq.mp4",
+    color: "#14532d", // Vert foncé
   },
   {
-    title: "Quiz go",
-    description: "Quiz go est une application de quiz.",
+    title: "Quiz Go",
+    description:
+      "Application mobile de quiz interactive et gamifiée, conçue pour tester les connaissances des utilisateurs de manière ludique.",
     stack: ["React Native"],
-    videoUrl: "/videos/project4.mp4",
-    color: "#212F3C",
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458896/20250624-1912-13.1762648_k6roav.mp4",
+    color: "#701a75", // Magenta profond
   },
 ];
 
-const ProjetCard = ({
-  projet,
-  index,
-}: {
-  projet: ProjetType;
-  index: number;
-}) => {
-  return (
-    <div
-      className="projet-card absolute top-0 left-1/2 -translate-x-1/2 w-[90%] max-w-6xl rounded-3xl overflow-hidden shadow-2xl"
-      data-index={index}
-      style={{ backgroundColor: projet.color }}
-    >
-      <div className="flex flex-col md:flex-row gap-8 p-8 md:p-12 min-h-[500px]">
-        <div className="flex-1 flex flex-col justify-center text-white">
-          <h3 className="text-4xl md:text-5xl font-bold mb-4">
-            {projet.title}
-          </h3>
-          <div className="text-lg md:text-xl mb-6 opacity-90">
-            {projet.description ? (
-              <p>{projet.description}</p>
-            ) : (
-              <p>Aucune description n&apos;est disponible</p>
-            )}
-          </div>
-          <div className="grid grid-cols-4 gap-3">
-            {projet.stack.map((tech, i) => (
-              <span
-                key={i}
-                className="px-4 py-2 bg-blue-500 backdrop-blur-sm rounded-full text-sm text-center font-medium"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1 flex items-center justify-center">
-          <video
-            src={projet.videoUrl}
-            className="w-full h-full object-cover aspect-video rounded-xl flex items-center justify-center overflow-hidden"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
+// --- Composant Principal ---
 export default function Project() {
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
-  useEffect(() => {
-    if (!cardsRef.current) return;
+  useGSAP(
+    () => {
+      // 1. Gestion des z-index pour l'empilement
+      sectionsRef.current.forEach((section, index) => {
+        if (section) {
+          gsap.set(section, { zIndex: index + 1 });
+        }
+      });
 
-    const cards = gsap.utils.toArray(".projet-card") as HTMLElement[];
-    const totalCards = cards.length;
+      // 2. Animation du contenu à l'intérieur de chaque section lors du scroll
+      // On crée un ScrollTrigger pour chaque section pour animer son contenu quand elle arrive
+      sectionsRef.current.forEach((section) => {
+        if (!section) return;
 
-    cards.forEach((card, index) => {
-      if (index === 0) {
-        gsap.set(card, {
-          zIndex: 0,
-          y: 0,
-          scale: 1,
-          opacity: 1,
+        const content = section.querySelector(".project-content");
+        const video = section.querySelector(".project-video");
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top center", // Commence l'anim quand le haut de la section est au centre de l'écran
+            end: "bottom center",
+            toggleActions: "play none none reverse", // Joue à l'aller, inverse au retour
+          },
         });
-      } else {
-        gsap.set(card, {
-          zIndex: index,
-          y: window.innerHeight,
-          scale: 0.95,
-          opacity: 1,
-        });
-      }
-    });
 
-    ScrollTrigger.create({
-      trigger: cardsRef.current,
-      start: "top top",
-      end: `+=${window.innerHeight * (totalCards - 1)}`,
-      pin: true,
-      scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const progressPerCard = 1 / (totalCards - 1);
+        tl.fromTo(
+          content,
+          { y: 50, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }
+        ).fromTo(
+          video,
+          { scale: 0.9, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 0.8, ease: "power3.out" },
+          "-=0.6" // Commence un peu avant la fin de l'anim précédente
+        );
+      });
+    },
+    { scope: containerRef }
+  );
 
-        cards.forEach((card, index) => {
-          if (index === 0) return;
-
-          const cardStart = (index - 1) * progressPerCard;
-          const cardEnd = index * progressPerCard;
-
-          let cardProgress = (progress - cardStart) / (cardEnd - cardStart);
-          cardProgress = Math.max(0, Math.min(1, cardProgress));
-
-          const targetY = index * 20;
-          const currentY =
-            window.innerHeight - (window.innerHeight - targetY) * cardProgress;
-
-          gsap.to(card, {
-            y: currentY,
-            scale: 0.95 + 0.05 * cardProgress,
-            opacity: cardProgress,
-            duration: 0,
-            ease: "none",
-          });
-        });
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
+  // Fonction utilitaire pour ajouter les refs au tableau
+  const addToRefs = (el: HTMLElement | null) => {
+    if (el && !sectionsRef.current.includes(el)) {
+      sectionsRef.current.push(el);
+    }
+  };
 
   return (
-    <div id="projets" className="px-8 md:px-30 mb-8">
-      <div className="flex flex-col space-y-4">
-        <CopyText>
-          <h3 className="text-4xl font-bold">Projets réaliser</h3>
-        </CopyText>
-        <CopyText>
-          <p>
-            Voici quelques projets personnel sur lesquels j&apos;ai eu a faire
-            durant mon temps libre.
-          </p>
-        </CopyText>
+    <section id="projets" className="relative" ref={containerRef}>
+      {/* HEADER DE SECTION (Visible au début avant le stacking) */}
+      <div className="py-24 px-6 md:px-12 lg:px-24 bg-black">
+        <div className="max-w-7xl mx-auto space-y-4">
+          <CopyText delay={0.1} blockColor="#3b82f6">
+            <h2 className="text-blue-500 font-bold tracking-widest uppercase text-sm">
+              Portfolio
+            </h2>
+          </CopyText>
+          <CopyText delay={0.2} blockColor="#2563eb">
+            <h3 className="text-4xl md:text-6xl font-extrabold text-white">
+              Projets <span className="text-blue-600">Réalisés</span>
+            </h3>
+          </CopyText>
+          <CopyText delay={0.3}>
+            <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
+              Une sélection de mes travaux personnels et professionnels,
+              illustrant ma capacité à transformer des concepts en applications
+              fonctionnelles et performantes.
+            </p>
+          </CopyText>
+        </div>
       </div>
 
-      {/* <div ref={cardsRef} className="relative h-screen">
+      {/* CONTENEUR DES PROJETS STACKÉS */}
+      {/* L'astuce est ici : on ne met pas d'overflow hidden sur le parent direct */}
+      <div className="relative w-full">
         {projets.map((projet, index) => (
-          <ProjetCard key={index} projet={projet} index={index} />
-        ))}
-      </div> */}
-
-      <div className="space-y-3">
-        <div className="flex flex-col justify-center items-center justify-items-center p-4 space-y-3">
-          {projets.map((el, index) => (
-            <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              key={index}
-              className="flex gap-3 w-5xl h-86 bg-gray-900 rounded items-start p-12"
-              style={{ backgroundColor: el.color ? el.color : "transparent" }}
-            >
-              <div className="w-1/2 space-y-3">
-                <CopyText>
-                  <h4 className="text-xl font-bold">{el.title}</h4>
-                </CopyText>
-                <CopyText>
-                  <p className="italic">{el.description}</p>
-                </CopyText>
-
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                {el.stack.map((ol, index) => (
-                  <div
-                    key={index}
-                    className="bg-blue-500 text-white rounded-full flex justify-center items-center px-2"
-                  >
-                    <span className="text-center text-base">{ol}</span>
+          // C'EST ICI QUE SE PASSE LE STICKY STACKING
+          // h-screen = plein écran
+          // sticky top-0 = colle en haut
+          <section
+            key={index}
+            ref={addToRefs}
+            className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden"
+            style={{ backgroundColor: projet.color }}
+          >
+            <div className="container mx-auto px-6 md:px-12 lg:px-24 h-full flex items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full items-center">
+                {/* --- COLONNE GAUCHE : TEXTE & STACK --- */}
+                <div className="project-content flex flex-col justify-center text-white space-y-8">
+                  <div>
+                    {/* Numéro du projet stylisé */}
+                    <span className="font-black text-6xl md:text-8xl absolute -top-20 -left-10 select-none opacity-20">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="relative text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                      {projet.title}
+                    </h3>
                   </div>
-                ))}
+
+                  <div className="text-lg text-gray-300 leading-relaxed font-light max-w-xl">
+                    <p>
+                      {projet.description || "Description du projet à venir."}
+                    </p>
+                  </div>
+
+                  {/* Stack technique avec icônes */}
+                  <div className="flex flex-wrap items-center gap-3">
+                    {projet.stack.map((tech, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full text-sm font-medium transition-all hover:bg-white/20 hover:scale-105"
+                      >
+                        <span className="text-blue-400 text-lg">
+                          {iconMap[tech] || null}
+                        </span>
+                        <span>{tech}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Bouton d'action (Optionnel) */}
+                  {/* <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-fit mt-4 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-colors shadow-lg shadow-blue-600/30"
+                  >
+                    Voir le projet
+                  </motion.button> */}
+                </div>
+
+                {/* --- COLONNE DROITE : VIDEO --- */}
+                <div className="project-video h-full flex items-center justify-center lg:justify-end overflow-hidden relative">
+                  {/* Effet de lueur derrière la vidéo */}
+                  <div className="absolute inset-0 blur-3xl rounded-full scale-110"></div>
+
+                  <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl">
+                    {/* Placeholder si pas de vidéo, sinon la vidéo */}
+                    <div className="w-full h-full flex items-center justify-center text-white/20">
+                      {/* Remplace cette div par ta balise video quand tu auras les fichiers */}
+                      <video
+                        src={projet.videoUrl}
+                        className="w-full h-full object-contain"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                      <span className="font-bold text-xl uppercase tracking-widest">
+                        Aperçu Vidéo
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div>
-                <video
-                  className="aspect-video h-70 w-1/2 rounded-lg"
-                  src={el.videoUrl}
-                  autoPlay
-                  playsInline
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </section>
+        ))}
       </div>
-    </div>
+
+      {/* Espaceur final pour permettre au dernier projet de scroller complètement si besoin */}
+      {/* <div className="h-[10vh] bg-black"></div> */}
+    </section>
   );
 }
