@@ -12,6 +12,10 @@ import {
   SiFlutter,
   SiPostgresql,
   SiExpress,
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiAdonisjs,
 } from "react-icons/si";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -33,10 +37,22 @@ const iconMap: { [key: string]: React.ReactNode } = {
   Flutter: <SiFlutter />,
   PostgreSQL: <SiPostgresql />,
   "Express JS": <SiExpress />,
+  HTML: <SiHtml5 />,
+  CSS: <SiCss3 />,
+  JavaScript: <SiJavascript />,
+  Adonis: <SiAdonisjs />,
   // Ajoute les autres icônes manquantes si besoin (Adonis, Prisma, etc.)
 };
 
 const projets: ProjetType[] = [
+  {
+    title: "Copy de whatsapp android",
+    description: "Une copy de whatsapp fait avec Next JS et typescript",
+    stack: ["Next.js", "Typescript"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767601795/whatsapp_apps_mq96jv.mkv",
+    color: "#052e16",
+  },
   {
     title: "Réseau Social X-Clone",
     description:
@@ -45,6 +61,21 @@ const projets: ProjetType[] = [
     videoUrl:
       "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763459208/nwSy6DrQfj_sawc9i.mp4", // Assure-toi que ces vidéos existent
     color: "#0f172a", // Bleu nuit très sombre
+  },
+  {
+    title: "HG Vision Graphic",
+    description: "J'ai coder un site vitrine pour un freelance designer.",
+    color: "#4c0519",
+    stack: ["HTML", "CSS", "JavaScript"],
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767602668/hg_vision-graphic_agdvtg.mkv",
+  },
+  {
+    title: "Dashboard d'une app de transaction financiare",
+    color: "#000",
+    videoUrl:
+      "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767601789/Dashboard_plateforme_de_transaction_ooogrn.mkv",
+    stack: ["Next.js", "TypeScript"],
   },
   {
     title: "Mojito Brand",
@@ -169,7 +200,7 @@ export default function Project() {
             </h3>
           </CopyText>
           <CopyText delay={0.3}>
-            <p className="text-gray-400 text-lg max-w-2xl leading-relaxed">
+            <p className="text-lg max-w-2xl leading-relaxed">
               Une sélection de mes travaux personnels et professionnels,
               illustrant ma capacité à transformer des concepts en applications
               fonctionnelles et performantes.
@@ -253,9 +284,6 @@ export default function Project() {
                         loop
                         playsInline
                       />
-                      <span className="font-bold text-xl uppercase tracking-widest">
-                        Aperçu Vidéo
-                      </span>
                     </div>
                   </div>
                 </div>

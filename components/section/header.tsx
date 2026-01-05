@@ -27,7 +27,7 @@ function Header() {
   return (
     <div
       id="header"
-      className="relative w-full min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
     >
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
@@ -44,7 +44,6 @@ function Header() {
                 Développeur Full-Stack & Mobile
               </span>
             </CopyText>
-
             {/* Taille de texte réduite et mieux proportionnée */}
             <CopyText delay={0.4} blockColor="#2563eb">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight customFont">
@@ -54,20 +53,18 @@ function Header() {
 
             {/* max-w-3xl pour que le texte s'étale plus horizontalement */}
             <CopyText delay={0.6} blockColor="#3b82f6">
-              <div className="max-w-3xl text-gray-400 text-base md:text-lg leading-relaxed">
+              <div className="max-w-3xl text-base md:text-lg leading-relaxed">
                 <p>
                   Je conçois des solutions digitales qui allient performance
                   technique et esthétique moderne. En tant que développeur
                   passionné par l&apos;architecture logicielle, je me spécialise
                   dans la création d&apos;applications robustes, du backend
-                  sécurisé aux interfaces mobiles intuitives.
-                </p>
-                <p className="mt-5 text-gray-300">
-                  Chaque projet est une opportunité de repousser les limites du
-                  possible, en transformant des besoins métiers complexes en
-                  expériences utilisateur fluides, scalables et durables. Mon
-                  approche repose sur une veille constante et une exigence de
-                  qualité sans compromis.
+                  sécurisé aux interfaces mobiles intuitives. Chaque projet est
+                  une opportunité de repousser les limites du possible, en
+                  transformant des besoins métiers complexes en expériences
+                  utilisateur fluides, scalables et durables. Mon approche
+                  repose sur une veille constante et une exigence de qualité
+                  sans compromis.
                 </p>
               </div>
             </CopyText>

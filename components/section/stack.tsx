@@ -115,6 +115,15 @@ const backendStack = [
       "SGBD avancé, JSON, transactions, triggers et fonctionnalités PostGIS",
   },
   {
+    label: "Prisma",
+    iconUrl:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original-wordmark.svg",
+    taux: "83%",
+    level: "Intermediare",
+    description:
+      "ORM pour les commnunications avec les bases de donnees sans devoir ecrire une seul ligne de SQL",
+  },
+  {
     label: "Python",
     iconUrl:
       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
@@ -234,13 +243,11 @@ const StackCard = ({
         <h4 className="font-bold text-xl text-white mb-2 group-hover:text-blue-400 transition-colors">
           {label}
         </h4>
-        <p className="leading-relaxed line-clamp-3 mb-4">
-          {description}
-        </p>
+        <p className="leading-relaxed line-clamp-3 mb-4">{description}</p>
       </div>
 
       <div className="relative z-10 space-y-2">
-        <div className="flex justify-between text-[10px] font-mono text-gray-500 uppercase">
+        <div className="flex justify-between text-[10px] font-mono uppercase">
           <span>Expertise</span>
           <span>{taux}</span>
         </div>
@@ -271,13 +278,13 @@ function Stack() {
             </h2>
           </CopyText>
           <CopyText delay={0.2}>
-            <h3 className="text-4xl md:text-5xl font-extrabold text-white">
+            <h3 className="text-4xl md:text-5xl font-extrabold">
               Ma Stack{" "}
               <span className="text-blue-600 text-outline">Technique</span>
             </h3>
           </CopyText>
           <CopyText delay={0.3}>
-            <p className="max-w-2xl text-gray-400 text-lg leading-relaxed">
+            <p className="max-w-2xl text-lg leading-relaxed">
               Durant mon parcours de développeur, j&apos;ai eu l&apos;occasion
               de travailler sur une multitude de technologies. Aujourd&apos;hui,
               je me concentre sur des outils qui permettent de créer des
@@ -288,7 +295,7 @@ function Stack() {
 
         {/* --- FRONTEND --- */}
         <div className="mb-16">
-          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+          <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Frontend Development{" "}
             <div className="h-[1px] flex-grow bg-white/10" />
           </h4>
@@ -301,7 +308,7 @@ function Stack() {
 
         {/* --- BACKEND --- */}
         <div className="mb-16">
-          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+          <h4 className=" text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Backend & Databases{" "}
             <div className="h-[1px] flex-grow bg-white/10" />
           </h4>
@@ -314,7 +321,7 @@ function Stack() {
 
         {/* --- MOBILE --- */}
         <div className="mb-16">
-          <h4 className="text-white/30 text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
+          <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Mobile Development <div className="h-[1px] flex-grow bg-white/10" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
