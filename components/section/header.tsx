@@ -3,7 +3,6 @@
 import Image from "next/image";
 import photo from "../../public/profile.jpeg";
 import { motion } from "framer-motion";
-import { Spotlight } from "../ui/spotlight";
 import CopyText from "../animations/CopyText";
 import {
   SiTailwindcss,
@@ -29,19 +28,15 @@ function Header() {
       id="header"
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
     >
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="#3b82f6"
-      />
 
       {/* Container principal plus large avec px-8 à lg:px-20 */}
-      <section className="container mx-auto px-8 md:px-12 lg:px-20 max-w-[1400px] flex flex-col lg:flex-row justify-between items-center gap-12 z-10">
+      <section className="container mx-auto px-8 md:px-12 lg:px-20 max-w-350 flex flex-col lg:flex-row justify-between items-center gap-12 z-10">
         {/* Zone de texte élargie : lg:w-3/5 et max-w-3xl */}
         <div className="flex flex-col space-y-10 w-full lg:w-3/5 text-left">
           <div className="space-y-6">
             <CopyText delay={0.2} blockColor="#3b82f6">
               <span className="text-blue-500 font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs">
-                Développeur Full-Stack & Mobile
+                Développeur web & Mobile
               </span>
             </CopyText>
             {/* Taille de texte réduite et mieux proportionnée */}
@@ -83,7 +78,7 @@ function Header() {
                 className="group relative flex items-center justify-center p-3.5 rounded-xl bg-slate-900/40 border border-white/5 hover:border-blue-500/50 transition-all duration-300"
                 title={tech.name}
               >
-                <div className="text-2xl text-gray-500 group-hover:text-blue-500 group-hover:scale-110 transition-transform duration-300">
+                <div className="text-2xl  group-hover:text-blue-500 group-hover:scale-110 transition-transform duration-300">
                   {tech.icon}
                 </div>
               </div>
@@ -101,20 +96,21 @@ function Header() {
           <div className="relative group">
             <div className="absolute -inset-4 bg-blue-600/10 rounded-3xl blur-2xl"></div>
 
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-95 lg:h-95 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
               <Image
                 src={photo}
                 alt="NGASSAKI Chadrack"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover hover:grayscale transition-all duration-700"
                 width={500}
                 height={500}
+                quality={100}
                 priority
               />
             </div>
 
             {/* Badge flottant plus discret */}
             <motion.div
-              animate={{ y: [0, -8, 0] }}
+              animate={{ y: [0, -8, 0], x: [0, -8, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute -bottom-4 -right-4 bg-white text-black p-3 px-5 rounded-full shadow-2xl z-20"
             >
@@ -130,7 +126,7 @@ function Header() {
       </section>
 
       {/* Subtle Background Shape */}
-      <div className="absolute -bottom-20 -left-20 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-[120px] -z-10"></div>
+      <div className="absolute -bottom-20 -left-20 w-125 h-125 bg-blue-600/5 rounded-full blur-[120px] -z-10"></div>
     </div>
   );
 }

@@ -473,7 +473,7 @@ const StaggeredMenuContent = ({
       >
         <div
           ref={preLayersRef}
-          className="sm-prelayers absolute top-0 right-0 bottom-0 pointer-events-none z-[5]"
+          className="sm-prelayers absolute top-0 right-0 bottom-0 z-[5]"
           aria-hidden="true"
         >
           {(() => {
@@ -497,7 +497,7 @@ const StaggeredMenuContent = ({
         </div>
 
         <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
+          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent z-20"
           aria-label="Main navigation header"
         >
           <div
@@ -716,7 +716,7 @@ export const StaggeredMenu = (
           data-position={props.position || "right"}
         >
           <header
-            className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent pointer-events-none z-20"
+            className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-[2em] bg-transparent z-20"
             aria-label="Main navigation header"
           >
             <div className="sm-logo flex items-center select-none pointer-events-auto">

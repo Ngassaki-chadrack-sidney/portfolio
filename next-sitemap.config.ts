@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://chadrack-ngassaki.vercel.app/",
+  siteUrl: "https://ngassaki-chadrack.vercel.app/",
   generateRobotsTxt: true,
 };

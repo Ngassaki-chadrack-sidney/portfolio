@@ -14,7 +14,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: "exp-webtinix",
-    poste: "Développeur web",
+    poste: "Développeur web Junior",
     entreprise: "Webtinix",
     type: "CDI",
     dateDebut: "2025-06",
@@ -27,7 +27,7 @@ export const experiences: Experience[] = [
       "Intégration de fonctionnalités e-commerce avancées",
       "Optimisation des performances et de l'expérience utilisateur",
     ],
-    technologies: ["Next.js", "React", "TypeScript", "PrestaShop", "Figma"],
+    technologies: ["Next.js", "React", "TypeScript", "PrestaShop", "Figma", "PHP"],
     localisation: "Brazzaville",
   },
 ];

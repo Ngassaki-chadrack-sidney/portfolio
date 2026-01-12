@@ -1,15 +1,26 @@
+import FloatingNavbar from "@/components/floatingNavBar";
 import Contact from "@/components/section/contact";
 import Experiences from "@/components/section/experiences";
 import Footer from "@/components/section/footer";
 import Header from "@/components/section/header";
-import { Navigation } from "@/components/section/menuBar";
 import Project from "@/components/section/project";
 import Stack from "@/components/section/stack";
 
 export default function Home() {
+  const navItems = [
+    { id: "home", label: "Principal", href: "#home" },
+    { id: "stack", label: "Stack", href: "#stack" },
+    { id: "projet", label: "Projet", href: "#projets" },
+    { id: "contact", label: "Contact", href: "#contact" },
+    { id: "cv", label: "CV", href: "cv" },
+  ]
+
   return (
     <main style={{ height: "100vh" }} className="pt-15">
-      <Navigation />
+      <FloatingNavbar
+        items={navItems}
+        hoverColor="text-blue-500"
+      />
       <Header />
       <Stack />
       <Project />

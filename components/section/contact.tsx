@@ -1,18 +1,35 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Send, MapPin, Phone } from "lucide-react";
+import { Mail, Send, MapPin, Phone, Loader2 } from "lucide-react";
 import CopyText from "../animations/CopyText";
 
 export default function Contact() {
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const mailtoLink = `mailto:jrh3948@gmail.com?subject=Message de ${encodeURIComponent(name)}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+
+    window.location.href = mailtoLink;
+
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
+
   return (
     <section
       id="contact"
       className="w-full py-24 px-6 md:px-12 lg:px-24 bg-black relative overflow-hidden"
     >
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute top-0 right-0 w-125 h-125 bg-blue-600/5 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -59,58 +76,58 @@ export default function Contact() {
             viewport={{ once: true }}
             className="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl backdrop-blur-xl"
           >
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={(e: any) => handleSubmit(e as any)}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                  <label className="text-xs font-bold uppercase tracking-widest ml-1">
                     Nom Complet
                   </label>
                   <input
                     type="text"
                     placeholder="John Doe"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    required
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                  <label className="text-xs font-bold uppercase tracking-widest ml-1">
                     Email
                   </label>
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
-                  Sujet
-                </label>
-                <input
-                  type="text"
-                  placeholder="Développement Application Mobile"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-gray-400 ml-1">
+                <label className="text-xs font-bold uppercase tracking-widest  ml-1">
                   Message
                 </label>
                 <textarea
                   rows={5}
                   placeholder="Décrivez votre projet..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                  required
                 ></textarea>
               </div>
 
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-600/20"
+                type="submit"
+                className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-600/20 ${isLoading && "cursor-not-allowed"}`}
+                disabled={isLoading}
               >
-                Envoyer le message <Send size={18} />
+                Envoyer le message {isLoading ? <Loader2 className="animate-spin" /> : <Send />}
               </motion.button>
             </form>
           </motion.div>

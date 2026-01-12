@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Experience, getExperiencesSorted } from "@/data/experiences";
 import { Calendar, MapPin, Briefcase, ChevronRight } from "lucide-react";
 import CopyText from "../animations/CopyText";
@@ -15,7 +14,7 @@ function ExperienceCard({
   return (
     <div className="relative flex gap-8">
       {/* Contenu de l'expérience */}
-      <motion.div whileHover={{ x: 10 }} className="pb-16 flex-grow">
+      <div className="pb-16 grow">
         <div className="bg-slate-900/50 border border-white/5 p-6 md:p-8 rounded-2xl backdrop-blur-sm hover:border-blue-500/30 transition-all shadow-xl">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
@@ -31,7 +30,7 @@ function ExperienceCard({
               </p>
             </div>
 
-            <div className="flex flex-col items-start md:items-end gap-2 text-gray-400 text-sm">
+            <div className="flex flex-col items-start md:items-end gap-2 text-sm">
               <div className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full">
                 <Calendar size={14} />
                 <span>
@@ -53,7 +52,7 @@ function ExperienceCard({
             {experience.missions.map((mission, idx) => (
               <li
                 key={idx}
-                className="flex items-start gap-3 text-gray-400 leading-relaxed"
+                className="flex items-start gap-3 leading-relaxed"
               >
                 <ChevronRight
                   size={18}
@@ -76,7 +75,7 @@ function ExperienceCard({
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

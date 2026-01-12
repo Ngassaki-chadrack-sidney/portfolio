@@ -228,7 +228,7 @@ export default function Project() {
                 <div className="project-content flex flex-col justify-center text-white space-y-8">
                   <div>
                     {/* Numéro du projet stylisé */}
-                    <span className="font-black text-6xl md:text-8xl absolute -top-20 -left-10 select-none opacity-20">
+                    <span className="text-6xl md:text-8xl absolute -top-20 -left-10 ">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <h3 className="relative text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">

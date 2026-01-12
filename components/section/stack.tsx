@@ -182,7 +182,6 @@ const StackCard = ({
   isFeatured,
 }: StackItemProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const scanLineRef = useRef<HTMLDivElement>(null);
 
   // 1. Gestion de la lueur qui suit la souris (Framer Motion)
   const mouseX = useMotionValue(0);
@@ -220,12 +219,6 @@ const StackCard = ({
         }}
       />
 
-      {/* Ligne de scan GSAP */}
-      <div
-        ref={scanLineRef}
-        className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400 to-transparent z-0 pointer-events-none opacity-0 group-hover:opacity-100"
-      />
-
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-6">
           <div className="rounded-xl">
@@ -235,7 +228,7 @@ const StackCard = ({
               className="w-20 h-20 object-contain"
             />
           </div>
-          <span className="text-[10px] font-bold text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-tighter">
+          <span className="text-[10px] font-bold text-black bg-white px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-tighter">
             {level}
           </span>
         </div>
@@ -288,7 +281,7 @@ function Stack() {
               Durant mon parcours de développeur, j&apos;ai eu l&apos;occasion
               de travailler sur une multitude de technologies. Aujourd&apos;hui,
               je me concentre sur des outils qui permettent de créer des
-              produits **rapides, scalables et centrés sur l&apos;utilisateur.**
+              produits rapides, scalables et centrés sur l&apos;utilisateur.
             </p>
           </CopyText>
         </div>

@@ -50,7 +50,7 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
               variant="slideUp"
               duration={0.4}
               // delay={0.05}
-              className="text-gray-400 text-sm"
+              className=" text-sm"
             >
               {experience.entreprise}
             </TextAnimation>
@@ -61,14 +61,14 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
         </div>
 
         {/* Date and location */}
-        <div className="flex flex-col gap-2 mb-4 text-sm text-gray-400">
+        <div className="flex flex-col gap-2 mb-4 text-sm ">
           <TextAnimation
             variant="slideUp"
             duration={0.4}
             // delay={0.1}
             className="flex items-center gap-2"
           >
-            <Calendar size={16} className="text-gray-500" />
+            <Calendar size={16} className="" />
             {dateRange}
           </TextAnimation>
           {experience.localisation && (
@@ -78,7 +78,7 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
               // delay={0.15}
               className="flex items-center gap-2"
             >
-              <MapPin size={16} className="text-gray-500" />
+              <MapPin size={16} className="" />
               {experience.localisation}
             </TextAnimation>
           )}
@@ -92,7 +92,7 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
             // delay={0.2}
             className="flex items-center gap-2 mb-3"
           >
-            <Briefcase size={16} className="text-gray-500" />
+            <Briefcase size={16} className="" />
             <span className="text-sm font-semibold text-gray-300">
               Missions
             </span>
@@ -104,9 +104,9 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
                 variant="slideUp"
                 // duration={0.4}
                 delay={0.25 + idx * 0.05}
-                className="text-sm text-gray-400 pl-6 relative"
+                className="text-sm  pl-6 relative"
               >
-                <span className="absolute left-0 text-gray-600">•</span>
+                <span className="absolute left-0 ">•</span>
                 {mission}
               </TextAnimation>
             ))}

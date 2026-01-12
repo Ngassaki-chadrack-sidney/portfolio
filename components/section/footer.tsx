@@ -23,7 +23,7 @@ function Footer() {
   return (
     <footer className="w-full mb-14 py-20 px-8 md:px-16 lg:px-24 border-t border-white/5 bg-[#050505] relative overflow-hidden">
       {/* Effet de lueur en arrière-plan */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-50" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-px bg-linear-to-r from-transparent via-blue-500 to-transparent opacity-50" />
 
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
         {/* Partie Gauche : Infos & Status */}
@@ -50,7 +50,7 @@ function Footer() {
 
         {/* Partie Droite : Réseaux Sociaux */}
         <div className="flex flex-col items-start md:items-end gap-6">
-          <span className="text-gray-400 text-sm font-medium uppercase tracking-widest">
+          <span className=" text-sm font-medium uppercase tracking-widest">
             Connectons-nous
           </span>
 
@@ -69,7 +69,7 @@ function Footer() {
                   aria-label={link.name}
                 >
                   <Icon
-                    className="text-gray-400 group-hover:text-blue-500 transition-colors"
+                    className=" group-hover:text-blue-500 transition-colors"
                     size={22}
                   />
 
@@ -84,7 +84,7 @@ function Footer() {
 
           <motion.a
             href="#header"
-            className="flex items-center gap-2 text-xs text-gray-500 hover:text-white transition-colors uppercase tracking-widest font-bold mt-4"
+            className="flex items-center gap-2 text-xs  hover:text-white transition-colors uppercase tracking-widest font-bold mt-4"
           >
             Retour en haut <ExternalLink size={12} className="-rotate-90" />
           </motion.a>
