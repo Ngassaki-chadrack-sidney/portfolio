@@ -26,7 +26,7 @@ function Header() {
   return (
     <div
       id="header"
-      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative w-full h-auto flex items-center justify-center overflow-hidden"
     >
 
       {/* Container principal plus large avec px-8 à lg:px-20 */}
@@ -67,13 +67,16 @@ function Header() {
 
           {/* Icons Stack */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.8 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, staggerChildren: 0.3 }}
             className="flex flex-wrap items-center gap-5 pt-4"
           >
             {techStack.map((tech, index) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
                 key={index}
                 className="group relative flex items-center justify-center p-3.5 rounded-xl bg-slate-900/40 border border-white/5 hover:border-blue-500/50 transition-all duration-300"
                 title={tech.name}
@@ -81,7 +84,7 @@ function Header() {
                 <div className="text-2xl  group-hover:text-blue-500 group-hover:scale-110 transition-transform duration-300">
                   {tech.icon}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>

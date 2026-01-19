@@ -17,6 +17,7 @@ export default function Contact() {
     const mailtoLink = `mailto:jrh3948@gmail.com?subject=Message de ${encodeURIComponent(name)}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
 
     window.location.href = mailtoLink;
+    setIsLoading(false)
 
     setName('');
     setEmail('');
