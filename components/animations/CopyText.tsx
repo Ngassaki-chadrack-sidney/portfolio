@@ -29,15 +29,10 @@ const CopyText = ({
   // Configuration de l'animation pour le bloc de couleur
   const blockVariants = {
     hidden: { scaleX: 0, originX: 0 },
-    visible: (i: number) => ({
+    visible: {
       scaleX: [0, 1, 1, 0],
       originX: [0, 0, 1, 1],
-      transition: {
-        duration: duration * 2, // Le cycle complet (aller-retour)
-        ease: "easeInOut",
-        delay: delay + i * stagger,
-      },
-    }),
+    },
   };
 
   // Configuration de l'animation pour le texte
@@ -71,12 +66,16 @@ const CopyText = ({
 
           {/* Le Bloc de Révélation (Reveal Block) */}
           <motion.div
-            custom={i}
             initial="hidden"
             whileInView={animateOnScroll ? "visible" : undefined}
             animate={!animateOnScroll ? "visible" : undefined}
             viewport={{ once: true }}
             variants={blockVariants}
+            transition={{
+              duration: duration * 2,
+              ease: [0.4, 0, 0.2, 1],
+              delay: delay + i * stagger,
+            }}
             style={{
               position: "absolute",
               top: 0,

@@ -108,7 +108,6 @@ const contentVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" }
   },
 };
 
@@ -117,7 +116,6 @@ const videoVariants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.8, ease: "easeOut", delay: 0.2 }
   },
 };
 
@@ -161,6 +159,7 @@ export default function Project() {
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.4 }}
                   variants={contentVariants}
+                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <div className="relative">
                     <span className="text-6xl md:text-8xl absolute -top-20 -left-10 font-bold">
@@ -197,6 +196,7 @@ export default function Project() {
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.4 }}
                   variants={videoVariants}
+                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
                 >
                   <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10">
                     <video

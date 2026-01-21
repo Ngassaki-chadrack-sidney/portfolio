@@ -3,7 +3,6 @@
 import { Experience } from "@/data/experiences";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Briefcase } from "lucide-react";
-import { TextAnimation } from "@/components/animations/TextAnimation";
 import { BorderTrail } from "../ui/border-trail";
 
 interface ExperienceCardProps {
@@ -39,21 +38,12 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
       <div className="relative bg-gray-900/50 border border-gray-700 rounded-xl p-6 hover:border-gray-600 transition-all duration-300 backdrop-blur-sm">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
-            <TextAnimation
-              variant="slideUp"
-              duration={0.4}
-              className="text-xl font-bold text-white mb-1"
-            >
+            <h3 className="text-xl font-bold text-white mb-1">
               {experience.poste}
-            </TextAnimation>
-            <TextAnimation
-              variant="slideUp"
-              duration={0.4}
-              // delay={0.05}
-              className=" text-sm"
-            >
+            </h3>
+            <p className="text-sm">
               {experience.entreprise}
-            </TextAnimation>
+            </p>
           </div>
           <Badge className={`${getTypeColor(experience.type)} border`}>
             {experience.type}
@@ -61,80 +51,47 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
         </div>
 
         {/* Date and location */}
-        <div className="flex flex-col gap-2 mb-4 text-sm ">
-          <TextAnimation
-            variant="slideUp"
-            duration={0.4}
-            // delay={0.1}
-            className="flex items-center gap-2"
-          >
-            <Calendar size={16} className="" />
+        <div className="flex flex-col gap-2 mb-4 text-sm">
+          <div className="flex items-center gap-2">
+            <Calendar size={16} />
             {dateRange}
-          </TextAnimation>
+          </div>
           {experience.localisation && (
-            <TextAnimation
-              variant="slideUp"
-              duration={0.4}
-              // delay={0.15}
-              className="flex items-center gap-2"
-            >
-              <MapPin size={16} className="" />
+            <div className="flex items-center gap-2">
+              <MapPin size={16} />
               {experience.localisation}
-            </TextAnimation>
+            </div>
           )}
         </div>
 
         {/* Missions */}
         <div className="mb-4">
-          <TextAnimation
-            variant="slideUp"
-            duration={0.4}
-            // delay={0.2}
-            className="flex items-center gap-2 mb-3"
-          >
-            <Briefcase size={16} className="" />
+          <div className="flex items-center gap-2 mb-3">
+            <Briefcase size={16} />
             <span className="text-sm font-semibold text-gray-300">
               Missions
             </span>
-          </TextAnimation>
+          </div>
           <ul className="space-y-2">
             {experience.missions.map((mission, idx) => (
-              <TextAnimation
-                key={idx}
-                variant="slideUp"
-                // duration={0.4}
-                delay={0.25 + idx * 0.05}
-                className="text-sm  pl-6 relative"
-              >
-                <span className="absolute left-0 ">•</span>
+              <li key={idx} className="text-sm pl-6 relative">
+                <span className="absolute left-0">•</span>
                 {mission}
-              </TextAnimation>
+              </li>
             ))}
           </ul>
         </div>
 
         {/* Technologies */}
         <div>
-          <TextAnimation
-            variant="slideUp"
-            duration={0.4}
-            // delay={0.35}
-            className="text-sm font-semibold text-gray-300 mb-2"
-          >
+          <p className="text-sm font-semibold text-gray-300 mb-2">
             Technologies
-          </TextAnimation>
+          </p>
           <div className="flex flex-wrap gap-2">
             {experience.technologies.map((tech, idx) => (
-              <TextAnimation
-                key={tech}
-                variant="slideUp"
-                // duration={0.4}
-                delay={0.4 + idx * 0.05}
-              >
-                <Badge className="bg-blue-500 text-white px-2 py-1 border-gray-700 hover:bg-gray-700 transition-colors">
-                  {tech}
-                </Badge>
-              </TextAnimation>
+              <Badge key={tech} className="bg-blue-500 text-white px-2 py-1 border-gray-700 hover:bg-gray-700 transition-colors">
+                {tech}
+              </Badge>
             ))}
           </div>
         </div>

@@ -1,105 +1,91 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
-import { LenisProvider } from "@/components/Lenis/LenisProvider";
 import localFont from "next/font/local";
-import PageTransistion from "@/components/animations/PageTransistion";
 
 const customFont = localFont({
-  src: "../public/font.ttf",
+  src: "../public/font.ttf", // Conseil : convertis en .woff2 pour de meilleures performances
   display: "swap",
   variable: "--font-custom",
 });
 
+// Remplace par ton URL réelle
+const SITE_URL = "https://ngassaki-chadrack.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ngassaki-chadrack.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "NGASSAKI Chadrack | Développeur Full-Stack & Mobile",
     template: "%s | NGASSAKI Chadrack",
   },
   description:
-    "Développeur Full-Stack & Mobile passionné. Je crée des solutions performantes et innovantes avec React, Next.js, Node.js et Flutter. Découvrez mon portfolio et mes projets.",
-  keywords: [
-    "NGASSAKI Chadrack",
-    "développeur",
-    "développeur web",
-    "développeur mobile",
-    "full-stack",
-    "React",
-    "Next.js",
-    "Node.js",
-    "TypeScript",
-    "Flutter",
-    "portfolio",
-    "freelance",
-    "Brazzaville",
-    "Congo",
-  ],
-  authors: [{ name: "NGASSAKI Chadrack", url: "https://ngassaki-chadrack.com" }],
-  creator: "NGASSAKI Chadrack",
-  publisher: "NGASSAKI Chadrack",
+    "Développeur Full-Stack & Mobile spécialisé en React, Next.js et Flutter. Création d'applications performantes et innovantes à Brazzaville.",
+  keywords: ["Développeur Full-Stack", "Next.js", "Flutter", "Brazzaville", "Congo"],
+  authors: [{ name: "NGASSAKI Chadrack" }],
   alternates: {
     canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-snippet": -1,
-      "max-image-preview": "large",
-      "max-video-preview": -1,
-    },
   },
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://ngassaki-chadrack.com",
-    siteName: "NGASSAKI Chadrack - Portfolio",
-    title: "NGASSAKI Chadrack | Développeur Full-Stack & Mobile",
-    description:
-      "Développeur Full-Stack & Mobile passionné. Je crée des solutions performantes et innovantes avec React, Next.js, Node.js et Flutter.",
+    url: SITE_URL,
+    siteName: "NGASSAKI Chadrack Portfolio",
     images: [
       {
         url: "/profile.jpeg",
         width: 1200,
         height: 630,
-        alt: "NGASSAKI Chadrack - Développeur Web & mobile",
+        alt: "NGASSAKI Chadrack - Développeur Full-Stack",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NGASSAKI Chadrack | Développeur Full-Stack & Mobile",
-    description:
-      "Développeur Full-Stack & Mobile passionné. Je crée des solutions performantes et innovantes.",
     images: ["/profile.jpeg"],
   },
-  verification: {
-    google: "ton-code-google-search-console",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
 };
 
 export const viewport: Viewport = {
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5,
-  themeColor: "#000000",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="fr">
-      <body
-        className={`${customFont.variable} font-sans bg-black text-white antialiased`}
-      >
-        <LenisProvider>
-          <PageTransistion>{children}</PageTransistion>
-        </LenisProvider>
+      <body className={`${customFont.variable} font-sans bg-black text-white antialiased`}>
+        {/* JSON-LD directement dans le body ou via un composant dédié est plus propre */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              "name": "NGASSAKI Chadrack",
+              "url": SITE_URL,
+              "image": `${SITE_URL}/profile.jpeg`,
+              "jobTitle": "Développeur Full-Stack & Mobile",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Brazzaville",
+                "addressCountry": "CG"
+              },
+              "sameAs": [
+                "https://github.com/ngassaki-chadrack",
+                "https://linkedin.com/in/ngassaki-chadrack"
+              ]
+            }),
+          }}
+        />
+        {children}
       </body>
     </html>
   );

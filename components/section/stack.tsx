@@ -4,12 +4,9 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useSpring,
-  useTransform,
 } from "framer-motion";
 import CopyText from "../animations/CopyText";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
+import { useRef } from "react";
 
 const frontendStack = [
   {
@@ -201,9 +198,8 @@ const StackCard = ({
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-6 transition-all hover:border-blue-500/50 ${
-        isFeatured ? "md:col-span-2 md:row-span-2" : ""
-      }`}
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-6 transition-all hover:border-blue-500/50 ${isFeatured ? "md:col-span-2 md:row-span-2" : ""
+        }`}
     >
       {/* Effet de lueur radiale */}
       <motion.div
@@ -290,7 +286,7 @@ function Stack() {
         <div className="mb-16">
           <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Frontend Development{" "}
-            <div className="h-[1px] flex-grow bg-white/10" />
+            <div className="h-px grow bg-white/10" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {frontendStack.map((item) => (
@@ -303,7 +299,7 @@ function Stack() {
         <div className="mb-16">
           <h4 className=" text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Backend & Databases{" "}
-            <div className="h-[1px] flex-grow bg-white/10" />
+            <div className="h-px grow bg-white/10" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {backendStack.map((item) => (
@@ -315,7 +311,7 @@ function Stack() {
         {/* --- MOBILE --- */}
         <div className="mb-16">
           <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
-            Mobile Development <div className="h-[1px] flex-grow bg-white/10" />
+            Mobile Development <div className="h-px grow bg-white/10" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mobileStack.map((item) => (

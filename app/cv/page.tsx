@@ -1,10 +1,8 @@
 "use client";
 
 import { getExperiencesSorted } from "@/data/experiences";
-import { TextAnimation } from "@/components/animations/TextAnimation";
 import Footer from "@/components/section/footer";
 import { Download } from "lucide-react";
-import { motion } from "framer-motion";
 import FloatingNavbar from "@/components/floatingNavBar";
 import Experiences from "@/components/section/experiences";
 
@@ -28,25 +26,17 @@ export default function CVPage() {
       <section className="w-full pt-32 pb-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-4">
-            <TextAnimation variant="slideUp" duration={0.6}>
-              <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
-                CV & <span className="text-blue-600">Parcours</span>
-              </h1>
-            </TextAnimation>
-            <TextAnimation variant="slideUp" duration={0.6} delay={0.1}>
-              <p className=" text-lg max-w-xl leading-relaxed">
-                Expertise en développement Full-Stack et Mobile. Consultez mes
-                expériences ou téléchargez la version PDF pour vos archives.
-              </p>
-            </TextAnimation>
+            <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
+              CV & <span className="text-blue-600">Parcours</span>
+            </h1>
+            <p className=" text-lg max-w-xl leading-relaxed">
+              Expertise en développement Full-Stack et Mobile. Consultez mes
+              expériences ou téléchargez la version PDF pour vos archives.
+            </p>
           </div>
           {/* 
           {/* BOUTON DE TÉLÉCHARGEMENT AMÉLIORÉ */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="relative group"
-          >
+          <div className="relative group">
             <div className="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-1000"></div>
             <a
               href="/cv.pdf"
@@ -56,7 +46,7 @@ export default function CVPage() {
               <Download size={20} />
               TÉLÉCHARGER LE PDF
             </a>
-          </motion.div>
+          </div>
         </div>
       </section>
 
