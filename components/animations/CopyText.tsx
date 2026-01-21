@@ -1,11 +1,7 @@
 "use client";
 
-import React, { useRef, useCallback } from "react";
-import gsap from "gsap";
-import { SplitText, ScrollTrigger } from "gsap/all";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(SplitText, ScrollTrigger);
+import React from "react";
+import { motion } from "framer-motion";
 
 interface CopyTextProps {
   children: React.ReactNode;
@@ -14,108 +10,87 @@ interface CopyTextProps {
   duration?: number;
   delay?: number;
   stagger?: number;
-  className?: string; // Ajout pour garder tes styles CSS
+  className?: string;
 }
 
-function CopyText({
+const CopyText = ({
   children,
   animateOnScroll = true,
   blockColor = "#3b82f6",
-  duration = 0.6,
+  duration = 0.5, // Ajusté pour plus de nervosité avec Framer
   delay = 0,
   stagger = 0.1,
   className = "",
-}: CopyTextProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+}: CopyTextProps) => {
 
-  useGSAP(
-    () => {
-      if (!containerRef.current) return;
+  // On transforme les enfants en tableau pour pouvoir les animer un par un
+  const items = React.Children.toArray(children);
 
-      // 1. On split le texte en lignes
-      const childElements =
-        containerRef.current.children.length > 0
-          ? Array.from(containerRef.current.children)
-          : [containerRef.current];
+  // Configuration de l'animation pour le bloc de couleur
+  const blockVariants = {
+    hidden: { scaleX: 0, originX: 0 },
+    visible: (i: number) => ({
+      scaleX: [0, 1, 1, 0],
+      originX: [0, 0, 1, 1],
+      transition: {
+        duration: duration * 2, // Le cycle complet (aller-retour)
+        ease: "easeInOut",
+        delay: delay + i * stagger,
+      },
+    }),
+  };
 
-      const splits = childElements.map((el) => {
-        return new SplitText(el, {
-          type: "lines",
-          linesClass: "split-line",
-        });
-      });
-
-      const allLines = splits.flatMap((s) => s.lines);
-
-      // 2. Création des wrappers et des blocs de révélation de manière propre
-      const animations = allLines.map((line) => {
-        // On entoure chaque ligne d'un wrapper "overflow hidden"
-        const wrapper = document.createElement("div");
-        wrapper.style.position = "relative";
-        wrapper.style.overflow = "hidden";
-        wrapper.style.display = "block"; // Important pour le layout
-        wrapper.className = "line-wrapper";
-
-        line.parentNode?.insertBefore(wrapper, line);
-        wrapper.appendChild(line);
-
-        // Création du bloc de couleur (Reveal Block)
-        const block = document.createElement("div");
-        block.style.position = "absolute";
-        block.style.top = "0";
-        block.style.left = "0";
-        block.style.width = "100%";
-        block.style.height = "100%";
-        block.style.backgroundColor = blockColor;
-        block.style.transformOrigin = "left center";
-        block.style.transform = "scaleX(0)";
-        wrapper.appendChild(block);
-
-        // Timeline pour cette ligne précise
-        const tl = gsap.timeline({ paused: true });
-        tl.to(block, { scaleX: 1, duration: duration, ease: "power3.inOut" })
-          .set(line, { opacity: 1 }) // Le texte est invisible au début (via CSS ou GSAP)
-          .set(block, { transformOrigin: "right center" })
-          .to(block, { scaleX: 0, duration: duration, ease: "power3.inOut" });
-
-        return { tl, wrapper };
-      });
-
-      // Rendre le texte invisible initialement pour éviter le flash
-      gsap.set(allLines, { opacity: 0 });
-
-      // 3. Animation au scroll ou immédiate
-      if (animateOnScroll) {
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: "top 85%",
-          onEnter: () => {
-            animations.forEach((anim, i) => {
-              gsap.delayedCall(delay + i * stagger, () => anim.tl.play());
-            });
-          },
-          once: true,
-        });
-      } else {
-        animations.forEach((anim, i) => {
-          gsap.delayedCall(delay + i * stagger, () => anim.tl.play());
-        });
-      }
-
-      // Nettoyage lors du démontage
-      return () => {
-        splits.forEach((s) => s.revert());
-        ScrollTrigger.getAll().forEach((st) => st.kill());
-      };
-    },
-    { scope: containerRef, dependencies: [children] }
-  );
+  // Configuration de l'animation pour le texte
+  const textVariants = {
+    hidden: { opacity: 0 },
+    visible: (i: number) => ({
+      opacity: 1,
+      transition: {
+        // Le texte apparaît précisément quand le bloc est à scaleX: 1 (milieu de l'anim)
+        delay: delay + i * stagger + duration,
+        duration: 0.01,
+      },
+    }),
+  };
 
   return (
-    <div ref={containerRef} className={`relative ${className}`}>
-      {children}
+    <div className={`relative ${className}`}>
+      {items.map((item, i) => (
+        <div key={i} className="relative overflow-hidden w-fit inline-block mb-1 align-bottom">
+          {/* Le Texte */}
+          <motion.div
+            custom={i}
+            initial="hidden"
+            whileInView={animateOnScroll ? "visible" : undefined}
+            animate={!animateOnScroll ? "visible" : undefined}
+            viewport={{ once: true }}
+            variants={textVariants}
+          >
+            {item}
+          </motion.div>
+
+          {/* Le Bloc de Révélation (Reveal Block) */}
+          <motion.div
+            custom={i}
+            initial="hidden"
+            whileInView={animateOnScroll ? "visible" : undefined}
+            animate={!animateOnScroll ? "visible" : undefined}
+            viewport={{ once: true }}
+            variants={blockVariants}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: blockColor,
+              zIndex: 20,
+            }}
+          />
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default CopyText;
