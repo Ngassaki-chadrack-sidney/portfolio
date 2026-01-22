@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import CopyText from "../animations/CopyText";
 import { useRef } from "react";
+import Image from "next/image";
 
 const frontendStack = [
   {
@@ -92,6 +93,12 @@ const backendStack = [
     level: "Avancé",
     description:
       "Framework full-stack MVC robuste, ORM Lucid, validation et authentification",
+  },
+  {
+    label: "Nest JS",
+    iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
+    taux: "80%",
+    description: "Framework Backend robuste pour des applications a grande echelle."
   },
   {
     label: "MySQL",
@@ -218,7 +225,7 @@ const StackCard = ({
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-6">
           <div className="rounded-xl">
-            <img
+            <Image
               src={iconUrl}
               alt={label}
               className="w-20 h-20 object-contain"
