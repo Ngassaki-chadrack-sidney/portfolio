@@ -98,7 +98,8 @@ const backendStack = [
     label: "Nest JS",
     iconUrl: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
     taux: "80%",
-    description: "Framework Backend robuste pour des applications a grande echelle."
+    description: "Framework Backend robuste pour des applications a grande echelle.",
+    level: "Intermediare"
   },
   {
     label: "MySQL",
