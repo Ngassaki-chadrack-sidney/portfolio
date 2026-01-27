@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 
   verification: {
-    google: "N3iENDxC8qLhnAtl1CNxUICdbVFniE7zc_Gqk5Tnnmw",
+    google: "jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE",
   },
 
   openGraph: {
@@ -71,7 +71,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <meta name="google-site-verification" content="N3iENDxC8qLhnAtl1CNxUICdbVFniE7zc_Gqk5Tnnmw" />
+      <meta name="google-site-verification" content="jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE" />
       <body className={`${customFont.variable} font-sans bg-black text-white antialiased`}>
         {children}
       </body>
