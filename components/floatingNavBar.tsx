@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { ThemeToggle } from "./theme-toggle";
+import { LanguageToggle } from "./language-toggle";
 
 interface NavItem {
     id: string;
@@ -15,6 +17,7 @@ interface FloatingNavbarProps {
     className?: string;
     textColor?: string;
     hoverColor?: string;
+    showToggles?: boolean;
 }
 
 export default function FloatingNavbar({
@@ -22,6 +25,7 @@ export default function FloatingNavbar({
     className = "",
     textColor = "text-gray-400",
     hoverColor = "text-white",
+    showToggles = true,
 }: FloatingNavbarProps) {
     const [activeSection, setActiveSection] = useState("");
     const [isVisible, setIsVisible] = useState(false);
@@ -87,13 +91,13 @@ export default function FloatingNavbar({
                                             {isActive && (
                                                 <motion.div
                                                     layoutId="active-pill"
-                                                    className="absolute inset-0 bg-blue-600/20 border border-blue-500/30 rounded-full"
+                                                    className="absolute inset-0 bg-primary/20 border border-primary/30 rounded-full"
                                                     transition={{ type: "spring", duration: 0.5 }}
                                                 />
                                             )}
 
                                             <motion.span
-                                                className={`relative z-10 ${isActive ? "text-blue-400" : textColor
+                                                className={`relative z-10 ${isActive ? "text-primary" : textColor
                                                     } hover:${hoverColor}`}
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
@@ -104,6 +108,12 @@ export default function FloatingNavbar({
                                     </li>
                                 );
                             })}
+                            {showToggles && (
+                                <li className="flex items-center gap-2 ml-2">
+                                    <LanguageToggle />
+                                    <ThemeToggle />
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </motion.nav>

@@ -121,20 +121,20 @@ const videoVariants = {
 
 export default function Project() {
   return (
-    <section id="projets" className="relative bg-black">
+    <section id="projets" className="relative bg-background">
       {/* HEADER DE SECTION */}
       <div className="py-24 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto space-y-4">
           <CopyText delay={0.1} blockColor="#3b82f6">
-            <h2 className="text-blue-500 font-bold tracking-widest uppercase text-sm">Portfolio</h2>
+            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">Portfolio</h2>
           </CopyText>
           <CopyText delay={0.2} blockColor="#2563eb">
-            <h3 className="text-4xl md:text-6xl font-extrabold text-white">
-              Projets <span className="text-blue-600">Réalisés</span>
+            <h3 className="text-4xl md:text-6xl font-extrabold text-foreground">
+              Projets <span className="text-primary">Réalisés</span>
             </h3>
           </CopyText>
           <CopyText delay={0.3}>
-            <p className="text-lg text-gray-400 max-w-2xl leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
               Une sélection de mes travaux personnels et professionnels...
             </p>
           </CopyText>
@@ -154,7 +154,7 @@ export default function Project() {
 
                 {/* --- COLONNE GAUCHE : TEXTE --- */}
                 <motion.div
-                  className="flex flex-col justify-center text-white space-y-8"
+                  className="flex flex-col justify-center text-foreground space-y-8"
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: false, amount: 0.4 }}
@@ -170,7 +170,7 @@ export default function Project() {
                     </h3>
                   </div>
 
-                  <p className="text-lg text-gray-300 leading-relaxed font-light max-w-xl">
+                  <p className="text-lg text-foreground/80 leading-relaxed font-light max-w-xl">
                     {projet.description || "Description du projet à venir."}
                   </p>
 
@@ -178,9 +178,9 @@ export default function Project() {
                     {projet.stack.map((tech, i) => (
                       <div
                         key={i}
-                        className="flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 backdrop-blur-md rounded-full text-sm font-medium transition-all hover:bg-white/30"
+                        className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border border-border backdrop-blur-md rounded-full text-sm font-medium transition-all hover:bg-secondary"
                       >
-                        <span className="text-blue-400 text-lg">
+                        <span className="text-primary text-lg">
                           {iconMap[tech] || null}
                         </span>
                         <span>{tech}</span>
@@ -198,7 +198,7 @@ export default function Project() {
                   variants={videoVariants}
                   transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1], delay: 0.2 }}
                 >
-                  <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+                  <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-border">
                     <video
                       src={projet.videoUrl}
                       className="w-full h-full object-cover"

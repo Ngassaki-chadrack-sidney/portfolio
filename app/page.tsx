@@ -1,32 +1,21 @@
-import FloatingNavbar from "@/components/floatingNavBar";
-import Contact from "@/components/section/contact";
-import Experiences from "@/components/section/experiences";
-import Footer from "@/components/section/footer";
-import Header from "@/components/section/header";
-import Project from "@/components/section/project";
-import Stack from "@/components/section/stack";
+import Navbar from "@/components/ui/navbar";
+import Hero from "@/components/sections/Hero";
 
 export default function Home() {
   const navItems = [
-    { id: "home", label: "Principal", href: "#home" },
+    { id: "hero", label: "Accueil", href: "#hero" },
+    { id: "about", label: "À propos", href: "#about" },
     { id: "stack", label: "Stack", href: "#stack" },
-    { id: "projet", label: "Projet", href: "#projets" },
+    { id: "projets", label: "Projets", href: "#projets" },
+    { id: "experiences", label: "Expériences", href: "#experiences" },
     { id: "contact", label: "Contact", href: "#contact" },
-    { id: "cv", label: "CV", href: "cv" },
+    { id: "cv", label: "CV", href: "/cv" },
   ]
 
   return (
-    <main style={{ height: "100vh" }} className="pt-15">
-      <FloatingNavbar
-        items={navItems}
-        hoverColor="text-blue-500"
-      />
-      <Header />
-      <Stack />
-      <Project />
-      <Experiences />
-      <Contact />
-      <Footer key={"1"} />
+    <main className="pt-15">
+      <Navbar items={navItems} />
+      <Hero />
     </main>
   );
 }

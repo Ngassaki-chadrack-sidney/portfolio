@@ -206,7 +206,7 @@ const StackCard = ({
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-slate-950 p-6 transition-all hover:border-blue-500/50 ${isFeatured ? "md:col-span-2 md:row-span-2" : ""
+      className={`group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/50 ${isFeatured ? "md:col-span-2 md:row-span-2" : ""
         }`}
     >
       {/* Effet de lueur radiale */}
@@ -232,12 +232,12 @@ const StackCard = ({
               className="w-20 h-20 object-contain"
             />
           </div>
-          <span className="text-[10px] font-bold text-black bg-white px-3 py-1 rounded-full border border-blue-500/20 uppercase tracking-tighter">
+          <span className="text-[10px] font-bold text-foreground bg-secondary px-3 py-1 rounded-full border border-primary/20 uppercase tracking-tighter">
             {level}
           </span>
         </div>
 
-        <h4 className="font-bold text-xl text-white mb-2 group-hover:text-blue-400 transition-colors">
+        <h4 className="font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
           {label}
         </h4>
         <p className="leading-relaxed line-clamp-3 mb-4">{description}</p>
@@ -248,11 +248,11 @@ const StackCard = ({
           <span>Expertise</span>
           <span>{taux}</span>
         </div>
-        <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
+        <div className="w-full bg-secondary h-1 rounded-full overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: taux }}
-            className="h-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]"
+            className="h-full bg-primary shadow-[0_0_10px_rgba(var(--primary-rgb),0.5)]"
           />
         </div>
       </div>
@@ -264,20 +264,20 @@ function Stack() {
   return (
     <section
       id="stack"
-      className="w-full py-24 px-6 md:px-12 lg:px-20 bg-black"
+      className="w-full py-24 px-6 md:px-12 lg:px-20 bg-background"
     >
       <div className="max-w-7xl mx-auto">
         {/* TEXTE D'INTRODUCTION */}
         <div className="mb-20 space-y-4">
           <CopyText delay={0.1}>
-            <h2 className="text-blue-500 font-bold tracking-widest uppercase text-sm">
+            <h2 className="text-primary font-bold tracking-widest uppercase text-sm">
               Mon Arsenal
             </h2>
           </CopyText>
           <CopyText delay={0.2}>
             <h3 className="text-4xl md:text-5xl font-extrabold">
               Ma Stack{" "}
-              <span className="text-blue-600 text-outline">Technique</span>
+              <span className="text-primary">Technique</span>
             </h3>
           </CopyText>
           <CopyText delay={0.3}>
@@ -294,7 +294,7 @@ function Stack() {
         <div className="mb-16">
           <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Frontend Development{" "}
-            <div className="h-px grow bg-white/10" />
+            <div className="h-px grow bg-border" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {frontendStack.map((item) => (
@@ -307,7 +307,7 @@ function Stack() {
         <div className="mb-16">
           <h4 className=" text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
             Backend & Databases{" "}
-            <div className="h-px grow bg-white/10" />
+            <div className="h-px grow bg-border" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {backendStack.map((item) => (
@@ -319,7 +319,7 @@ function Stack() {
         {/* --- MOBILE --- */}
         <div className="mb-16">
           <h4 className="text-xs font-bold uppercase tracking-[0.3em] mb-8 flex items-center gap-4">
-            Mobile Development <div className="h-px grow bg-white/10" />
+            Mobile Development <div className="h-px grow bg-border" />
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {mobileStack.map((item) => (

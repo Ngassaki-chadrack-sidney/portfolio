@@ -27,10 +27,10 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full py-24 px-6 md:px-12 lg:px-24 bg-black relative overflow-hidden"
+      className="w-full py-24 px-6 md:px-12 lg:px-24 bg-background relative overflow-hidden"
     >
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-125 h-125 bg-blue-600/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute top-0 right-0 w-125 h-125 bg-primary/5 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -38,33 +38,33 @@ export default function Contact() {
           <div className="space-y-12">
             <div className="space-y-4">
               <CopyText delay={0.1}>
-                <span className="text-blue-500 font-bold tracking-widest uppercase text-xs">
+                <span className="text-primary font-bold tracking-widest uppercase text-xs">
                   Contact
                 </span>
               </CopyText>
               <CopyText delay={0.2}>
-                <h2 className="text-4xl md:text-4xl font-black text-white leading-tight">
+                <h2 className="text-4xl md:text-4xl font-black text-foreground leading-tight">
                   Parlons de votre{" "}
-                  <span className="text-blue-600">Prochain Projet</span>
+                  <span className="text-primary">Prochain Projet</span>
                 </h2>
               </CopyText>
             </div>
 
             <div className="space-y-8">
               <ContactLink
-                icon={<Mail className="text-blue-500" />}
+                icon={<Mail className="text-primary" />}
                 title="Email"
                 value="jrh3948@gmail,com"
                 href="mailto:jrh3948@gmail,com"
               />
               <ContactLink
-                icon={<Phone className="text-blue-500" />}
+                icon={<Phone className="text-primary" />}
                 title="Téléphone"
                 value="+242 06 473 29 24"
                 href="tel:+242064732923"
               />
               <ContactLink
-                icon={<MapPin className="text-blue-500" />}
+                icon={<MapPin className="text-primary" />}
                 title="Localisation"
                 value="Brazzaville, Congo"
               />
@@ -75,7 +75,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl backdrop-blur-xl"
+            className="bg-secondary/50 border border-border p-8 md:p-10 rounded-3xl backdrop-blur-xl"
           >
             <form className="space-y-6" onSubmit={(e: any) => handleSubmit(e as any)}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -88,7 +88,7 @@ export default function Contact() {
                     placeholder="John Doe"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-4 text-foreground focus:outline-none focus:border-primary transition-colors"
                     required
                   />
                 </div>
@@ -101,7 +101,7 @@ export default function Contact() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="john@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full bg-secondary/50 border border-border rounded-xl px-4 py-4 text-foreground focus:outline-none focus:border-primary transition-colors"
                     required
                   />
                 </div>
@@ -125,7 +125,7 @@ export default function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className={`w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-600/20 ${isLoading && "cursor-not-allowed"}`}
+                className={`w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 rounded-xl flex items-center justify-center gap-3 transition-colors shadow-lg shadow-primary/20 ${isLoading && "cursor-not-allowed"}`}
                 disabled={isLoading}
               >
                 Envoyer le message {isLoading ? <Loader2 className="animate-spin" /> : <Send />}
@@ -143,16 +143,16 @@ function ContactLink({ icon, title, value, href }: any) {
   return (
     <Component
       href={href}
-      className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all"
+      className="group flex items-center gap-6 p-4 rounded-2xl hover:bg-secondary/50 transition-all"
     >
-      <div className="w-14 h-14 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+      <div className="w-14 h-14 bg-primary/10 border border-primary/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
         {icon}
       </div>
       <div>
         <p className="text-xs font-bold uppercase tracking-widest mb-1">
           {title}
         </p>
-        <p className="text-white font-medium text-lg">{value}</p>
+        <p className="text-foreground font-medium text-lg">{value}</p>
       </div>
     </Component>
   );

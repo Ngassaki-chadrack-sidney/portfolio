@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { ThemeProvider } from "@/context/ThemeProvider";
 
 const customFont = localFont({
   src: "../public/font.ttf", // Conseil : convertis en .woff2 pour de meilleures performances
@@ -72,8 +74,17 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <meta name="google-site-verification" content="jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE" />
-      <body className={`${customFont.variable} font-sans bg-black text-white antialiased`}>
-        {children}
+      <body className={`${customFont.variable} font-sans bg-background text-foreground antialiased`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

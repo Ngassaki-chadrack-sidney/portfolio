@@ -15,23 +15,23 @@ function ExperienceCard({
     <div className="relative flex gap-8">
       {/* Contenu de l'expérience */}
       <div className="pb-16 grow">
-        <div className="bg-slate-900/50 border border-white/5 p-6 md:p-8 rounded-2xl backdrop-blur-sm hover:border-blue-500/30 transition-all shadow-xl">
+        <div className="bg-card border border-border p-6 md:p-8 rounded-2xl backdrop-blur-sm hover:border-primary/30 transition-all shadow-xl">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-              <div className="flex items-center gap-2 text-blue-500 font-mono text-sm mb-1">
+              <div className="flex items-center gap-2 text-primary font-mono text-sm mb-1">
                 <Briefcase size={14} />
                 <span>{experience.type}</span>
               </div>
-              <h4 className="text-2xl font-bold text-white">
+              <h4 className="text-2xl font-bold text-foreground">
                 {experience.poste}
               </h4>
-              <p className="text-lg text-blue-400 font-medium">
+              <p className="text-lg text-primary font-medium">
                 {experience.entreprise}
               </p>
             </div>
 
             <div className="flex flex-col items-start md:items-end gap-2 text-sm">
-              <div className="flex items-center gap-2 bg-white/5 px-3 py-1 rounded-full">
+              <div className="flex items-center gap-2 bg-secondary px-3 py-1 rounded-full">
                 <Calendar size={14} />
                 <span>
                   {experience.dateDebut} —{" "}
@@ -56,7 +56,7 @@ function ExperienceCard({
               >
                 <ChevronRight
                   size={18}
-                  className="text-blue-600 mt-1 shrink-0"
+                  className="text-primary mt-1 shrink-0"
                 />
                 <span>{mission}</span>
               </li>
@@ -68,7 +68,7 @@ function ExperienceCard({
             {experience.technologies.map((tech) => (
               <span
                 key={tech}
-                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 bg-white text-black rounded-full"
+                className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 bg-secondary text-secondary-foreground rounded-full"
               >
                 {tech}
               </span>
@@ -86,23 +86,23 @@ function Experiences() {
   return (
     <section
       id="experiences"
-      className="w-full py-32 px-8 md:px-16 lg:px-24 bg-[#050505]"
+      className="w-full py-32 px-8 md:px-16 lg:px-24 bg-muted"
     >
       <div className="max-w-5xl mx-auto">
         {/* En-tête de section */}
         <div className="mb-20">
           <CopyText delay={0.1}>
-            <span className="text-blue-500 font-bold tracking-[0.3em] uppercase text-xs">
+            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
               Mon Parcours
             </span>
           </CopyText>
           <CopyText delay={0.2}>
-            <h3 className="text-4xl md:text-5xl font-black text-white mt-4 mb-6">
+            <h3 className="text-4xl md:text-5xl font-black text-foreground mt-4 mb-6">
               Expériences{" "}
-              <span className="text-blue-600">Professionnelles</span>
+              <span className="text-primary">Professionnelles</span>
             </h3>
           </CopyText>
-          <div className="w-20 h-1.5 bg-blue-600 rounded-full" />
+          <div className="w-20 h-1.5 bg-primary rounded-full" />
         </div>
 
         {/* Liste des expériences avec ligne de temps */}
