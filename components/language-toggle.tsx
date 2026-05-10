@@ -1,19 +1,26 @@
 "use client";
 
-import * as React from "react";
-import { useTranslation } from "@/hooks/useTranslation";
+import { useContext } from "react";
+import { LanguageContext } from "@/context/LanguageContext";
 
 export function LanguageToggle() {
-  const { language, setLanguage } = useTranslation();
+  const context = useContext(LanguageContext);
+  
+  if (!context) {
+    return null;
+  }
+
+  const { language, setLanguage } = context;
 
   const toggleLanguage = () => {
-    setLanguage(language === "fr" ? "en" : "fr");
+    const newLang = language === "fr" ? "en" : "fr";
+    setLanguage(newLang);
   };
 
   return (
     <button
       onClick={toggleLanguage}
-      className="px-3 py-2 rounded-full bg-secondary border border-border hover:border-primary/50 transition-all duration-300 text-xs font-bold uppercase tracking-wider"
+      className="px-3 py-1.5 rounded-full bg-transparent border border-black text-black hover:bg-black hover:text-white transition-all duration-300 text-xs font-bold uppercase tracking-wider"
       aria-label="Toggle language"
     >
       {language === "fr" ? "FR" : "EN"}

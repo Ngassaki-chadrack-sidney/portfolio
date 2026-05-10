@@ -1,21 +1,21 @@
-import Navbar from "@/components/ui/navbar";
-import Hero from "@/components/sections/Hero";
+import About from "@/components/About";
+import ContactAndFooter from "@/components/Contact";
+import ExperienceSection from "@/components/ExperienceSection";
+import Hero from "@/components/Hero";
+import ProjectSectionSlide from "@/components/ProjectSectionSlide";
+import ProjectGrid from "@/components/Projets";
+import StackSection from "@/components/stack";
 
 export default function Home() {
-  const navItems = [
-    { id: "hero", label: "Accueil", href: "#hero" },
-    { id: "about", label: "À propos", href: "#about" },
-    { id: "stack", label: "Stack", href: "#stack" },
-    { id: "projets", label: "Projets", href: "#projets" },
-    { id: "experiences", label: "Expériences", href: "#experiences" },
-    { id: "contact", label: "Contact", href: "#contact" },
-    { id: "cv", label: "CV", href: "/cv" },
-  ]
-
   return (
     <main className="pt-15">
-      <Navbar items={navItems} />
       <Hero />
+      <About />
+      <ProjectSectionSlide />
+      <ExperienceSection />
+      <StackSection />
+      <ProjectGrid />
+      <ContactAndFooter />
     </main>
   );
 }

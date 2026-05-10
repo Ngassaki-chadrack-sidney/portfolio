@@ -4,7 +4,9 @@ import { LanguageContext } from "@/context/LanguageContext";
 import fr from "@/locales/fr.json";
 import en from "@/locales/en.json";
 
-const translations: any = { fr, en };
+type Translations = typeof fr;
+
+const translations: Record<"fr" | "en", Translations> = { fr, en };
 
 export const useTranslation = () => {
   const context = useContext(LanguageContext);
@@ -12,8 +14,19 @@ export const useTranslation = () => {
   
   const { language, setLanguage } = context;
   
-  const t = (path: string) => {
-    return path.split('.').reduce((obj, key) => obj?.[key], translations[language]) || path;
+  const t = (key: string): string => {
+    const keys = key.split(".");
+    let value: unknown = translations[language];
+    
+    for (const k of keys) {
+      if (value && typeof value === "object" && k in value) {
+        value = (value as Record<string, unknown>)[k];
+      } else {
+        return key;
+      }
+    }
+    
+    return typeof value === "string" ? value : key;
   };
 
   return { t, language, setLanguage };

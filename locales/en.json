@@ -1,10 +1,43 @@
 {
   "hero": {
-    "badge": "Available",
-    "subtitle": "Full-Stack & Mobile Developer",
-    "title_part1": "NGASSAKI",
-    "title_part2": "Chadrack",
-    "description": "I build high-precision digital architectures, blending technical performance with premium aesthetics. Specialized in the React ecosystem and mobile development, I turn complex concepts into fluid, scalable, and user-centric products.",
-    "cta": "Explore my work"
+    "available": "Available",
+    "hello": "Hello! I'm",
+    "fullstack": "A Full Stack",
+    "developer": "DEVELOPER",
+    "engineer": "ENGINEER"
+  },
+  "about": {
+    "title": "Digital Architect, expert in high-impact solutions.",
+    "paragraph1": "My path is not linear, it's complete. I forged my skills as a Frontend Developer before diving into the complexities of Backend and Mobile. This dual expertise allows me to have a 360° vision on every product I build.",
+    "paragraph2": "Today, I don't just code lines; I create mobile solutions that change lives. Whether for international SaaS projects or local infrastructures, my philosophy remains the same: Ship fast, but make it premium."
+  },
+  "experience": {
+    "years": "+3years",
+    "domain": "in the field"
+  },
+  "stack": {
+    "title": "Tech Stack",
+    "Frontend": "Frontend",
+    "Backend & Frameworks": "Backend & Frameworks",
+    "Databases & ORM": "Databases & ORM",
+    "Mobile": "Mobile",
+    "DevOps & Tools": "DevOps & Tools"
+  },
+  "projects": {
+    "title": "Projects"
+  },
+  "contact": {
+    "title": "Let's Work Together.",
+    "email_label": "Send a message",
+    "footer_available": "Available for new projects",
+    "footer_copyright": "© — NGASSAKI CHADRACK. ALL RIGHTS RESERVED.",
+    "back_to_top": "Back to top ↑"
+  },
+  "navbar": {
+    "home": "Home",
+    "experience": "Experience",
+    "stack": "Stack",
+    "projects": "Projects",
+    "cv": "CV"
   }
 }

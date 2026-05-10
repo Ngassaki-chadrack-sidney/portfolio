@@ -1,10 +1,43 @@
 {
   "hero": {
-    "badge": "Disponible",
-    "subtitle": "Développeur Full-Stack & Mobile",
-    "title_part1": "NGASSAKI",
-    "title_part2": "Chadrack",
-    "description": "Je bâtis des architectures numériques de haute précision, alliant performance technique et esthétique premium. Spécialisé dans l'écosystème React et le développement mobile, je transforme vos concepts complexes en produits fluides, scalables et centrés sur l'expérience utilisateur.",
-    "cta": "Découvrir mes projets"
+    "available": "Disponible",
+    "hello": "Hello! I'm",
+    "fullstack": "A Full Stack",
+    "developer": "DEVELOPER",
+    "engineer": "ENGINEER"
+  },
+  "about": {
+    "title": "Architecte du Digital, expert en solutions à fort impact.",
+    "paragraph1": "Mon parcours n'est pas linéaire, il est complet. J'ai forgé mes armes en tant que Développeur Frontend avant de plonger dans les complexités du Backend et du Mobile. Cette double expertise me permet aujourd'hui d'avoir une vision à 360° sur chaque produit que je construis.",
+    "paragraph2": "Aujourd'hui, je ne me contente pas de coder des lignes ; je crée des solutions mobiles qui changent des vies. Que ce soit pour des projets SaaS internationaux ou des infrastructures locales, ma philosophie reste la même : Ship fast, but make it premium."
+  },
+  "experience": {
+    "years": "+3ans",
+    "domain": "dans le domain"
+  },
+  "stack": {
+    "title": "Stack Technique",
+    "Frontend": "Frontend",
+    "Backend & Frameworks": "Backend & Frameworks",
+    "Databases & ORM": "Databases & ORM",
+    "Mobile": "Mobile",
+    "DevOps & Tools": "DevOps & Tools"
+  },
+  "projects": {
+    "title": "Projets"
+  },
+  "contact": {
+    "title": "Travaillons Ensemble.",
+    "email_label": "Envoyez un message",
+    "footer_available": "Disponible pour de nouveaux projets",
+    "footer_copyright": "© — NGASSAKI CHADRACK. TOUS DROITS RÉSERVÉS.",
+    "back_to_top": "Retour en haut ↑"
+  },
+  "navbar": {
+    "home": "Accueil",
+    "experience": "Experience",
+    "stack": "Stack",
+    "projects": "Projets",
+    "cv": "CV"
   }
 }

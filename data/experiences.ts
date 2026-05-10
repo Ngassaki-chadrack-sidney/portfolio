@@ -1,49 +1,30 @@
-export interface Experience {
-  id: string;
-  poste: string;
-  entreprise: string;
-  type: "CDI" | "CDD" | "Stage" | "Freelance";
-  dateDebut: string;
-  dateFin: string | null;
-  actuel: boolean;
-  missions: string[];
-  technologies: string[];
-  localisation?: string;
-}
-
-export const experiences: Experience[] = [
+export const experiences = [
+  {
+    id: "exp-kale",
+    poste: "Développeur Full Stack",
+    entreprise: "Kale Logistics Solutions",
+    type: "Freelance",
+    date: "Janv 2025 — Avr 2025",
+    missions: [
+      "Développement d'applications mobiles cross-platform avec React Native.",
+      "Conception et développement d'API REST robustes avec NestJS.",
+      "Déploiement et orchestration via Docker sur serveurs VPS.",
+      "Configuration réseau et sécurité pour la communication Mobile-Backend."
+    ],
+    technologies: ["React Native", "NestJS", "Docker", "VPS", "PostgreSQL"]
+  },
   {
     id: "exp-webtinix",
-    poste: "Développeur web Junior",
+    poste: "Développeur Web Junior",
     entreprise: "Webtinix",
     type: "CDI",
-    dateDebut: "2025-06",
-    dateFin: "2026-01",
-    actuel: false,
+    date: "Juin 2025 — Janv 2026",
     missions: [
-      "Transformation de maquettes Figma en code avec Next.js",
-      "Développement d'interfaces utilisateur modernes et responsives",
-      "Amélioration et optimisation de boutiques e-commerce PrestaShop",
-      "Intégration de fonctionnalités e-commerce avancées",
-      "Optimisation des performances et de l'expérience utilisateur",
+      "Transformation de maquettes Figma complexes en interfaces Next.js.",
+      "Optimisation et customisation de boutiques e-commerce PrestaShop.",
+      "Intégration de fonctionnalités e-commerce avancées et gestion PHP.",
+      "Amélioration des performances Core Web Vitals."
     ],
-    technologies: ["Next.js", "React", "TypeScript", "PrestaShop", "Figma", "PHP"],
-    localisation: "Brazzaville",
-  },
+    technologies: ["Next.js", "TypeScript", "PrestaShop", "PHP", "Figma"]
+  }
 ];
-
-export const getExperiencesByType = (type: Experience["type"]) => {
-  return experiences.filter((exp) => exp.type === type);
-};
-
-export const getActiveExperience = () => {
-  return experiences.find((exp) => exp.actuel);
-};
-
-export const getExperiencesSorted = () => {
-  return [...experiences].sort((a, b) => {
-    const dateA = new Date(a.dateDebut).getTime();
-    const dateB = new Date(b.dateDebut).getTime();
-    return dateB - dateA;
-  });
-};

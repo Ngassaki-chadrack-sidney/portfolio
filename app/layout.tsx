@@ -3,11 +3,13 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeProvider";
+import FloatingNavbar from "@/components/floatingNavBar";
+import SmoothScroll from "@/components/SmoothScroll";
 
-const customFont = localFont({
-  src: "../public/font.ttf", // Conseil : convertis en .woff2 pour de meilleures performances
+const cabinetGrotesk = localFont({
+  src: "../public/fonts/cabinet-grotesk/CabinetGrotesk-Medium.otf",
   display: "swap",
-  variable: "--font-custom",
+  variable: "--font-cabinet",
 });
 
 // Remplace par ton URL réelle
@@ -74,18 +76,14 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <meta name="google-site-verification" content="jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE" />
-      <body className={`${customFont.variable} font-sans bg-background text-foreground antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
+<body className={`${cabinetGrotesk.variable} font-sans bg-black text-white antialiased`}>
           <LanguageProvider>
-            {children}
+            <SmoothScroll>
+              <FloatingNavbar />
+              {children}
+            </SmoothScroll>
           </LanguageProvider>
-        </ThemeProvider>
-      </body>
+        </body>
     </html>
   );
 }

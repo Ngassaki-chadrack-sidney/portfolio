@@ -1,28 +1,11 @@
 "use client";
 
-import { getExperiencesSorted } from "@/data/experiences";
-import Footer from "@/components/section/footer";
 import { Download } from "lucide-react";
-import FloatingNavbar from "@/components/floatingNavBar";
-import Experiences from "@/components/section/experiences";
+import ContactAndFooter from "@/components/Contact";
 
 export default function CVPage() {
-  const sortedExperiences = getExperiencesSorted();
-  const navItems = [
-    { id: "home", label: "Principal", href: "/" },
-    { id: "stack", label: "Stack", href: "/" },
-    { id: "projet", label: "Projet", href: "/" },
-    { id: "contact", label: "Contact", href: "/" },
-    { id: "cv", label: "CV", href: "cv" },
-  ]
-
   return (
     <main className="min-h-screen bg-[#050505] text-white">
-      <FloatingNavbar
-        items={navItems}
-        hoverColor="text-blue-500"
-      />
-
       <section className="w-full pt-32 pb-20 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div className="space-y-4">
@@ -63,9 +46,7 @@ export default function CVPage() {
         </div>
       </section>
 
-      <Experiences />
-
-      <Footer />
+      <ContactAndFooter />
     </main>
   );
 }
