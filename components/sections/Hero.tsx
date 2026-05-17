@@ -7,16 +7,15 @@ import { useTranslation } from "@/hooks/useTranslation";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 const coreTech = [
-  { name: "Next.js", icon: "nextjs-original" },
-  { name: "Flutter", icon: "flutter-plain" },
-  { name: "Prisma", icon: "prisma-original" },
-  { name: "AdonisJS", icon: "adonisjs-original" },
-  { name: "React Native", icon: "react-original" },
-  { name: "PostgreSQL", icon: "postgresql-plain" },
+  { name: "Next.js", icon: "nextjs/nextjs-original" },
+  { name: "Flutter", icon: "flutter/flutter-original" },
+  { name: "NestJS", icon: "nestjs/nestjs-original" },
+  { name: "AdonisJS", icon: "adonisjs/adonisjs-original" },
+  { name: "PostgreSQL", icon: "postgresql/postgresql-original" },
 ];
 
 const getIconUrl = (icon: string) =>
-  `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon.split("-")[0]}/${icon}.svg`;
+  `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${icon}.svg`;
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -30,9 +29,12 @@ export default function Hero() {
     const title = titleRef.current;
     if (!section || !title) return;
 
+    // Preserve original text for cleanup
     const originalText = title.innerText;
-    title.innerHTML = originalText
-      .split(" ")
+    
+    // Split text into words
+    const wordsArray = originalText.split(" ");
+    title.innerHTML = wordsArray
       .map(
         (word) =>
           `<span class="inline-block overflow-hidden"><span class="word inline-block">${word}&nbsp;</span></span>`,
@@ -41,48 +43,35 @@ export default function Hero() {
 
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const words = section.querySelectorAll(".word");
-      const techItems = section.querySelectorAll(".hero-core-tech");
-      const cta = section.querySelector(".hero-cta");
-
-      gsap.set(words, { yPercent: 100 });
-      gsap.set(techItems, { y: 30, opacity: 0, scale: 0.8 });
-      gsap.set(cta, { y: 20, opacity: 0 });
-
       const ctx = gsap.context(() => {
-        const tl = gsap.timeline();
+        const words = title.querySelectorAll(".word");
+        const techItems = section.querySelectorAll(".hero-tech-card");
+        const cta = section.querySelector(".hero-cta-wrapper");
 
-        tl.to(words, {
-          yPercent: 0,
+        const tl = gsap.timeline({ delay: 0.8 });
+
+        tl.from(words, {
+          yPercent: 100,
           duration: 1.2,
           stagger: 0.05,
           ease: "expo.out",
         })
-          .to(
-            techItems,
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              duration: 1,
-              stagger: 0.1,
-              ease: "back.out(1.7)",
-            },
-            "-=0.6",
-          )
-          .to(
-            cta,
-            {
-              y: 0,
-              opacity: 1,
-              duration: 1,
-              ease: "power3.out",
-            },
-            "-=0.4",
-          );
+        .fromTo(techItems,
+          { y: 40, opacity: 0, scale: 0.8 },
+          { y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.1, ease: "back.out(1.7)" },
+          "-=0.8"
+        )
+        .fromTo(cta,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
+          "-=0.6"
+        );
       }, section);
 
-      return () => ctx.revert();
+      return () => {
+        ctx.revert();
+        if (title) title.innerText = originalText;
+      };
     });
 
     return () => mm.revert();
@@ -92,39 +81,44 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative min-h-screen flex items-center justify-start px-[clamp(1.5rem,5vw,6rem)] overflow-hidden bg-background"
+      className="relative min-h-screen grid grid-cols-1 lg:grid-cols-12 items-center px-[clamp(1.5rem,5vw,6rem)] overflow-hidden bg-background pt-24"
     >
-      <div className="hero-content relative z-10 w-full max-w-[60vw] lg:max-w-[60%] mt-8">
+      {/* Decorative background elements */}
+      <div className="absolute top-1/4 -right-20 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[150px] pointer-events-none" />
+      
+      <div className="lg:col-span-10 xl:col-span-9 relative z-10 grid grid-cols-1 gap-12 lg:gap-16">
         <h1
           ref={titleRef}
-          className="text-6xl md:text-7xl font-bold break-words overflow-hidden"
+          className="text-[clamp(2.2rem,6.5vw,5.5rem)] font-black leading-[0.9] tracking-tighter text-foreground max-w-[95vw] lg:max-w-[85%]"
         >
           {t("hero.title")}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-6 mt-12 mb-16">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl">
           {coreTech.map((tech) => (
             <div
               key={tech.name}
-              className="hero-core-tech group flex flex-col items-center gap-2"
+              className="hero-tech-card group grid grid-cols-1 justify-items-center gap-4 p-6 rounded-[2rem] bg-surface/30 border-2 border-surface hover:border-accent/40 transition-all duration-500 shadow-xl shadow-black/5"
             >
-              <img
-                src={getIconUrl(tech.icon)}
-                alt={tech.name}
-                className="w-16 h-16 object-contain"
-              />
-              <span className="text-xs font-bold uppercase tracking-widest text-khaki-950 dark:text-khaki-50 group-hover:text-accent transition-colors">
+              <div className="w-10 h-10 relative">
+                <img
+                  src={getIconUrl(tech.icon)}
+                  alt={tech.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-khaki-950 dark:text-khaki-50 group-hover:text-accent transition-colors text-center">
                 {tech.name}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="hero-cta">
+        <div className="hero-cta-wrapper">
           <a href="#projects">
             <MagneticButton
               variant="primary"
-              className="px-14 py-6 text-base font-bold"
+              className="px-16 py-8 text-lg font-black tracking-widest uppercase"
             >
               {t("hero.cta")}
             </MagneticButton>

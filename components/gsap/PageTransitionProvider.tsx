@@ -36,12 +36,12 @@ export function PageTransitionProvider({
   const { t } = useTranslation();
   
   const containerRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
+  const initialized = useRef(false);
   
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const isAnimating = useRef(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const prevPathname = useRef(pathname);
 
   // SVG Paths
@@ -53,14 +53,19 @@ export function PageTransitionProvider({
 
   const animateIn = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
-      if (!pathRef.current || !textRef.current) return resolve();
+      if (isAnimatingRef.current || !pathRef.current || !textRef.current) return resolve();
+      isAnimatingRef.current = true;
 
       const tl = gsap.timeline({
-        onComplete: resolve,
+        onComplete: () => {
+          isAnimatingRef.current = false;
+          resolve();
+        },
       });
 
       tl.set(containerRef.current, { visibility: "visible" })
         .set(pathRef.current, { attr: { d: initialPath } })
+        .set(textRef.current, { opacity: 0 })
         .to(pathRef.current, {
           attr: { d: curvedEntrancePath },
           duration: 0.5,
@@ -68,34 +73,33 @@ export function PageTransitionProvider({
         })
         .to(pathRef.current, {
           attr: { d: flatPath },
-          duration: 0.6,
+          duration: 0.5,
           ease: "power3.out",
         })
-        .fromTo(textRef.current, 
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, ease: "expo.out" },
-          "-=0.4"
-        );
+        .to(textRef.current, {
+          opacity: 1,
+          duration: 0.3,
+        }, "-=0.2")
+        .to({}, { duration: 0.8 });
     });
   }, []);
 
   const animateOut = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
-      if (!pathRef.current || !textRef.current) return resolve();
+      if (isAnimatingRef.current || !pathRef.current || !textRef.current) return resolve();
+      isAnimatingRef.current = true;
 
       const tl = gsap.timeline({
         onComplete: () => {
           gsap.set(containerRef.current, { visibility: "hidden" });
+          isAnimatingRef.current = false;
           resolve();
         },
       });
 
       tl.to(textRef.current, {
-        y: -40,
         opacity: 0,
-        duration: 0.6,
-        ease: "power3.in",
-        delay: 0.5, // Pause for 1 second to show the text
+        duration: 0.3,
       })
       .to(pathRef.current, {
         attr: { d: curvedExitPath },
@@ -104,7 +108,7 @@ export function PageTransitionProvider({
       })
       .to(pathRef.current, {
         attr: { d: finalPath },
-        duration: 0.5,
+        duration: 0.4,
         ease: "power3.out",
       });
     });
@@ -112,8 +116,7 @@ export function PageTransitionProvider({
 
   const navigateTo = useCallback(
     async (href: string) => {
-      if (isAnimating.current || href === pathname) return;
-      isAnimating.current = true;
+      if (isAnimatingRef.current || href === pathname) return;
       setIsTransitioning(true);
 
       await animateIn();
@@ -127,25 +130,21 @@ export function PageTransitionProvider({
       prevPathname.current = pathname;
       animateOut().then(() => {
         setIsTransitioning(false);
-        isAnimating.current = false;
       });
     }
   }, [pathname, animateOut]);
 
-  // Initial Preloader
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     const handleInitialLoad = async () => {
-      // First, cover the screen immediately without animation
-      gsap.set(pathRef.current, { attr: { d: flatPath } });
+      setIsTransitioning(true);
       gsap.set(containerRef.current, { visibility: "visible" });
+      gsap.set(pathRef.current, { attr: { d: flatPath } });
+      gsap.set(textRef.current, { opacity: 1 });
       
-      // Wait a bit to show the text
-      await gsap.fromTo(textRef.current, 
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: "expo.out", delay: 0.2 }
-      );
-      
-      // Then animate out
+      await gsap.to({}, { duration: 1 });
       await animateOut();
       setIsTransitioning(false);
     };
@@ -161,7 +160,6 @@ export function PageTransitionProvider({
         style={{ visibility: "hidden" }}
       >
         <svg
-          ref={svgRef}
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
@@ -174,10 +172,10 @@ export function PageTransitionProvider({
         </svg>
         
         <div ref={textRef} className="relative z-10 text-center pointer-events-none px-6">
-          <h2 className="text-[clamp(2rem,6vw,4rem)] font-black tracking-tighter text-background leading-[1]">
+          <h2 className="text-[clamp(2.5rem,7vw,5rem)] font-black tracking-tighter text-background leading-[1]">
             {t("preloader.title")}
           </h2>
-          <p className="text-[clamp(1rem,2vw,1.5rem)] font-bold uppercase tracking-[0.3em] text-accent mt-4">
+          <p className="text-[clamp(1rem,2vw,1.5rem)] font-bold uppercase tracking-[0.4em] text-accent mt-6">
             {t("preloader.subtitle")}
           </p>
         </div>

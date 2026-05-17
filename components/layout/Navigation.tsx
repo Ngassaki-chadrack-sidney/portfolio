@@ -2,9 +2,11 @@
 
 import { useEffect, useRef, useState, useContext } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useTranslation } from "@/hooks/useTranslation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageContext } from "@/context/LanguageContext";
+import { TransitionLink } from "@/components/gsap/TransitionLink";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 
@@ -13,6 +15,7 @@ export default function Navigation() {
   const { setLanguage } = useContext(LanguageContext)!;
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -27,13 +30,15 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isHome = pathname === "/";
+
   const links = [
-    { href: "#about", label: t("navbar.about") },
-    { href: "#services", label: "Services" },
-    { href: "#projects", label: t("navbar.projects") },
-    { href: "#experience", label: "Experience" },
-    { href: "#stack", label: "Stack" },
-    { href: "#contact", label: t("navbar.contact") },
+    { href: isHome ? "#about" : "/#about", label: t("navbar.about") },
+    { href: isHome ? "#services" : "/#services", label: "Services" },
+    { href: isHome ? "#projects" : "/#projects", label: t("navbar.projects") },
+    { href: isHome ? "#experience" : "/#experience", label: "Experience" },
+    { href: isHome ? "#stack" : "/#stack", label: "Stack" },
+    { href: isHome ? "#contact" : "/#contact", label: t("navbar.contact") },
   ];
 
   return (
@@ -50,9 +55,9 @@ export default function Navigation() {
           ? "bg-background border-border" 
           : "bg-background/80 backdrop-blur-md border-accent/20"
       )}>
-        <Link href="/" className="text-lg font-black tracking-tighter uppercase mr-2">
+        <TransitionLink href="/" className="text-lg font-black tracking-tighter uppercase text-accent hover:text-foreground transition-colors mr-2">
           NC
-        </Link>
+        </TransitionLink>
 
         <div className="flex items-center gap-1 border-l border-border/50 pl-3 md:pl-6 overflow-x-auto no-scrollbar max-w-[40vw] sm:max-w-none">
           {links.map((link) => (
@@ -64,12 +69,12 @@ export default function Navigation() {
               {link.label}
             </Link>
           ))}
-          <Link
+          <TransitionLink
             href="/cv"
             className="px-2 md:px-3 py-2 text-[10px] uppercase tracking-[0.2em] font-black text-accent hover:text-foreground transition-colors whitespace-nowrap"
           >
             CV
-          </Link>
+          </TransitionLink>
         </div>
 
         <div className="flex items-center gap-2 md:gap-3 border-l border-border/50 pl-3 md:pl-6">

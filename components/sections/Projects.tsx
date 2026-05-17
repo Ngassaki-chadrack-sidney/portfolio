@@ -109,7 +109,7 @@ export default function Projects() {
         <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tight text-foreground">
           {t("projects.title")}
         </h2>
-        <p className="text-khaki-600 dark:text-khaki-400 font-medium max-w-sm">
+        <p className="text-lg text-foreground">
           {t("projects.intro")}
         </p>
       </div>
