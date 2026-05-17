@@ -84,7 +84,7 @@ export default function Experience() {
                 <div className="lg:col-span-3">
                   <div className="lg:sticky lg:top-32">
                     <span className="text-base font-black tracking-tight text-accent bg-accent/5 px-6 py-3 rounded-full border border-accent/20">
-                      {exp.date}
+                      {t(exp.date_key)}
                     </span>
                     <div className="mt-8 hidden lg:block">
                       <div className="w-1.5 h-32 bg-gradient-to-b from-accent/40 to-transparent ml-8 rounded-full" />
@@ -95,7 +95,7 @@ export default function Experience() {
                 <div className="lg:col-span-9 space-y-12">
                   <div className="space-y-4">
                     <h3 className="text-3xl md:text-5xl font-black tracking-tighter text-foreground">
-                      {exp.poste}
+                      {t(`experience.items.${exp.key}.poste`)}
                     </h3>
                     <p className="text-xl md:text-2xl text-khaki-700 dark:text-khaki-200 font-bold uppercase tracking-[0.15em]">
                       {exp.entreprise}
@@ -103,13 +103,13 @@ export default function Experience() {
                   </div>
 
                   <ul className="grid grid-cols-1 gap-6">
-                    {exp.missions.map((mission, i) => (
+                    {Array.from({ length: exp.missionCount }).map((_, i) => (
                       <li
                         key={i}
                         className="text-lg md:text-xl text-khaki-950 dark:text-khaki-50 flex items-start gap-5 font-semibold leading-relaxed"
                       >
                         <div className="w-4 h-4 rounded-full border-4 border-accent bg-background mt-2 shrink-0 " />
-                        {mission}
+                        {t(`experience.items.${exp.key}.missions.${i}`)}
                       </li>
                     ))}
                   </ul>

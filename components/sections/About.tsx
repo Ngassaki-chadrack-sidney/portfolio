@@ -118,13 +118,10 @@ export default function About() {
           <div className="lg:col-span-7 space-y-12">
             <div className="about-text-content space-y-6">
               <p className="text-2xl md:text-3xl font-bold text-accent leading-tight">
-                Specialized in Next.js, React Native & Flutter. Available for
-                freelance projects.
+                {t("about.skills_intro")}
               </p>
               <p className="text-lg md:text-xl leading-relaxed font-medium">
-                {t("about.text")} — I specialize in crafting high-performance
-                digital solutions that combine exceptional design with technical
-                excellence.
+                {t("about.text")}
               </p>
             </div>
 
@@ -154,11 +151,12 @@ export default function About() {
             >
               <div className="image-overlay absolute inset-0 bg-accent z-10" />
               <Image
-                src="/profile.png"
+                src="/ChadrackDev.png"
                 alt="NGASSAKI Chadrack Sidney"
                 fill
-                className="object-cover transition-transform duration-700"
+                className="object-contain transition-transform duration-700"
                 priority
+                quality={100}
               />
             </div>
           </div>

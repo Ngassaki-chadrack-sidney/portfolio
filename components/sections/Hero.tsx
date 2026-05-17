@@ -29,11 +29,7 @@ export default function Hero() {
     const title = titleRef.current;
     if (!section || !title) return;
 
-    // Preserve original text for cleanup
-    const originalText = title.innerText;
-    
-    // Split text into words
-    const wordsArray = originalText.split(" ");
+    const wordsArray = title.innerText.split(" ");
     title.innerHTML = wordsArray
       .map(
         (word) =>
@@ -68,10 +64,7 @@ export default function Hero() {
         );
       }, section);
 
-      return () => {
-        ctx.revert();
-        if (title) title.innerText = originalText;
-      };
+      return () => ctx.revert();
     });
 
     return () => mm.revert();
@@ -94,11 +87,11 @@ export default function Hero() {
           {t("hero.title")}
         </h1>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 max-w-4xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 wrap-normal gap-6 max-w-4xl">
           {coreTech.map((tech) => (
             <div
               key={tech.name}
-              className="hero-tech-card group grid grid-cols-1 justify-items-center gap-4 p-6 rounded-[2rem] bg-surface/30 border-2 border-surface hover:border-accent/40 transition-all duration-500 shadow-xl shadow-black/5"
+              className="hero-tech-card group grid grid-cols-1 justify-items-center gap-4 p-6 rounded-[2rem] bg-surface/30 border-2 border-surface hover:border-accent/40 transition-all duration-500"
             >
               <div className="w-10 h-10 relative">
                 <img
@@ -107,7 +100,7 @@ export default function Hero() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-khaki-950 dark:text-khaki-50 group-hover:text-accent transition-colors text-center">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] text-khaki-950 dark:text-khaki-50 text-center">
                 {tech.name}
               </span>
             </div>

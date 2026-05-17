@@ -17,56 +17,56 @@ import MagneticButton from "../ui/MagneticButton";
 
 const projets = [
   {
+    id: "whatsapp",
     title: "WhatsApp Clone",
-    description: "Une copy de whatsapp fait avec Next JS et typescript.",
     stack: ["nextjs", "typescript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767601795/whatsapp_apps_mq96jv.mkv",
   },
   {
+    id: "x-clone",
     title: "X-Clone Social",
-    description: "Conception d'une plateforme sociale moderne inspirée de Twitter/X.",
     stack: ["nextjs", "typescript", "adonisjs"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763459208/nwSy6DrQfj_sawc9i.mp4",
   },
   {
+    id: "hg-vision",
     title: "HG Vision Graphic",
-    description: "J'ai coder un site vitrine pour un freelance designer.",
     stack: ["html5", "css3", "javascript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767602668/hg_vision-graphic_agdvtg.mkv",
   },
   {
+    id: "dashboard",
     title: "Transaction Dashboard",
-    description: "Interface de gestion de transactions financières.",
     stack: ["nextjs", "typescript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1767601789/Dashboard_plateforme_de_transaction_ooogrn.mkv",
   },
   {
+    id: "mojito",
     title: "Mojito Brand",
-    description: "Site vitrine immersif pour une marque de boisson avec animations avancées.",
     stack: ["nextjs", "typescript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458344/replique_d_un_site_awwward_pkzvoi.mp4",
   },
   {
+    id: "notion-clone",
     title: "Notion Clone",
-    description: "Application de prise de note simulaire a notion.",
     stack: ["nextjs", "typescript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458393/notion_app_dj4drr.mp4",
   },
   {
+    id: "shadow-flix",
     title: "Shadow Flix",
-    description: "Application mobile cross-platform explorant l'API TMDB.",
     stack: ["react", "typescript"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458900/20250621-2042-00.2174813_gv38kx.mp4",
   },
   {
+    id: "chef-recipe",
     title: "Chef's Recipe App",
-    description: "Application mobile complète de gestion de recettes de cuisine.",
     stack: ["flutter", "nodejs", "postgresql"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458336/Screen_Recording_2025-10-03_155250_mjxfjq.mp4",
   },
   {
+    id: "quiz-go",
     title: "Quiz Go",
-    description: "Application mobile de quiz interactive et gamifiée.",
     stack: ["react"],
     videoUrl: "https://res.cloudinary.com/dji6k1cvh/video/upload/v1763458896/20250624-1912-13.1762648_k6roav.mp4",
   },
@@ -134,7 +134,7 @@ export default function Projects() {
                   {/* Magnetic 'View' Indicator */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
                       <MagneticButton>
-                        Voir le projet
+                        {t("projects.view")}
                       </MagneticButton>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ export default function Projects() {
                     </h3>
                     <div className="flex -space-x-3">
                       {project.stack.slice(0, 3).map((tech) => (
-                        <div key={tech} className="w-10 h-10 rounded-full bg-background border-2 border-surface p-2 flex items-center justify-center shadow-lg relative hover:z-10 hover:-translate-y-1 transition-all">
+                        <div key={tech} className="w-10 h-10 rounded-full bg-background border-2 border-surface p-2 flex items-center justify-center relative hover:z-10 hover:-translate-y-1 transition-all">
                           <img
                             src={getIconUrl(tech)}
                             className="w-full h-full object-contain"
@@ -161,7 +161,7 @@ export default function Projects() {
                     </div>
                   </div>
                   <p className="text-sm line-clamp-1">
-                    {project.description}
+                    {t(`projects.items.${project.id}.description`)}
                   </p>
                 </div>
               </div>
@@ -184,7 +184,7 @@ export default function Projects() {
                         {project.title}
                       </DialogTitle>
                       <DialogDescription className="text-khaki-700 dark:text-khaki-300 text-lg md:text-xl leading-relaxed pt-6">
-                        {project.description}
+                        {t(`projects.items.${project.id}.description`)}
                       </DialogDescription>
                     </DialogHeader>
                     

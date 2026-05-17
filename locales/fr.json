@@ -30,11 +30,62 @@
   "projects": {
     "title": "Projets",
     "intro": "Une sélection d'expériences numériques conçues avec précision et passion.",
-    "view": "Voir"
+    "view": "Voir",
+    "items": {
+      "whatsapp": {
+        "description": "Une copie de WhatsApp réalisée avec Next.js et TypeScript."
+      },
+      "x-clone": {
+        "description": "Une plateforme sociale moderne inspirée de Twitter/X."
+      },
+      "hg-vision": {
+        "description": "Site vitrine pour un freelance designer."
+      },
+      "dashboard": {
+        "description": "Interface de gestion de transactions financières."
+      },
+      "mojito": {
+        "description": "Site vitrine immersif pour une marque de boisson avec animations avancées."
+      },
+      "notion-clone": {
+        "description": "Application de prise de notes similaire à Notion."
+      },
+      "shadow-flix": {
+        "description": "Application mobile cross-platform explorant l'API TMDB."
+      },
+      "chef-recipe": {
+        "description": "Application mobile complète de gestion de recettes de cuisine."
+      },
+      "quiz-go": {
+        "description": "Application mobile de quiz interactive et gamifiée."
+      }
+    }
   },
   "experience": {
     "title": "Expérience",
-    "none": "Aucune donnée d'expérience trouvée."
+    "none": "Aucune donnée d'expérience trouvée.",
+    "items": {
+      "kale": {
+        "date": "Janv 2025 — Avr 2025",
+        "poste": "Développeur Full Stack",
+        "missions": {
+          "0": "Développement d'applications mobiles cross-platform avec React Native.",
+          "1": "Conception et développement d'API REST robustes avec NestJS.",
+          "2": "Déploiement et orchestration via Docker sur serveurs VPS.",
+          "3": "Configuration réseau et sécurité pour la communication Mobile-Backend."
+        }
+      },
+      "webtinix": {
+        "date": "Juin 2025 — Janv 2026",
+        "poste": "Développeur Web Junior",
+        "missions": {
+          "0": "Transformation de maquettes Figma complexes en interfaces Next.js.",
+          "1": "Optimisation et customisation de boutiques e-commerce PrestaShop.",
+          "2": "Intégration de fonctionnalités e-commerce avancées et gestion PHP.",
+          "3": "Amélioration des performances Core Web Vitals."
+        }
+      }
+    }
   },
   "stack": {
     "title": "Stack Technique",
@@ -55,6 +106,9 @@
   "navbar": {
     "projects": "Projets",
     "about": "À propos",
+    "services": "Services",
+    "experience": "Expérience",
+    "stack": "Stack",
     "contact": "Contact"
   },
   "footer": {

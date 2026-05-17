@@ -30,11 +30,62 @@
   "projects": {
     "title": "Projects",
     "intro": "A selection of digital experiences built with precision and passion.",
-    "view": "View"
+    "view": "View",
+    "items": {
+      "whatsapp": {
+        "description": "A WhatsApp clone built with Next.js and TypeScript."
+      },
+      "x-clone": {
+        "description": "A modern social platform inspired by Twitter/X."
+      },
+      "hg-vision": {
+        "description": "Showcase website for a freelance designer."
+      },
+      "dashboard": {
+        "description": "Financial transaction management dashboard."
+      },
+      "mojito": {
+        "description": "Immersive brand showcase site with advanced animations."
+      },
+      "notion-clone": {
+        "description": "Note-taking application similar to Notion."
+      },
+      "shadow-flix": {
+        "description": "Cross-platform mobile app exploring the TMDB API."
+      },
+      "chef-recipe": {
+        "description": "Complete recipe management mobile application."
+      },
+      "quiz-go": {
+        "description": "Interactive and gamified quiz mobile application."
+      }
+    }
   },
   "experience": {
     "title": "Experience",
-    "none": "No experience data found."
+    "none": "No experience data found.",
+    "items": {
+      "kale": {
+        "date": "Jan 2025 — Apr 2025",
+        "poste": "Full Stack Developer",
+        "missions": {
+          "0": "Cross-platform mobile app development with React Native.",
+          "1": "Design and development of robust REST APIs with NestJS.",
+          "2": "Deployment and orchestration via Docker on VPS servers.",
+          "3": "Network configuration and security for Mobile-Backend communication."
+        }
+      },
+      "webtinix": {
+        "date": "Jun 2025 — Jan 2026",
+        "poste": "Junior Web Developer",
+        "missions": {
+          "0": "Transforming complex Figma mockups into Next.js interfaces.",
+          "1": "Optimization and customization of PrestaShop e-commerce stores.",
+          "2": "Integration of advanced e-commerce features and PHP management.",
+          "3": "Core Web Vitals performance improvements."
+        }
+      }
+    }
   },
   "stack": {
     "title": "Tech Stack",
@@ -55,6 +106,9 @@
   "navbar": {
     "projects": "Projects",
     "about": "About",
+    "services": "Services",
+    "experience": "Experience",
+    "stack": "Stack",
     "contact": "Contact"
   },
   "footer": {

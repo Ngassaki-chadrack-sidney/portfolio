@@ -34,10 +34,10 @@ export default function Navigation() {
 
   const links = [
     { href: isHome ? "#about" : "/#about", label: t("navbar.about") },
-    { href: isHome ? "#services" : "/#services", label: "Services" },
+    { href: isHome ? "#services" : "/#services", label: t("navbar.services") },
     { href: isHome ? "#projects" : "/#projects", label: t("navbar.projects") },
-    { href: isHome ? "#experience" : "/#experience", label: "Experience" },
-    { href: isHome ? "#stack" : "/#stack", label: "Stack" },
+    { href: isHome ? "#experience" : "/#experience", label: t("navbar.experience") },
+    { href: isHome ? "#stack" : "/#stack", label: t("navbar.stack") },
     { href: isHome ? "#contact" : "/#contact", label: t("navbar.contact") },
   ];
 
@@ -80,12 +80,12 @@ export default function Navigation() {
         <div className="flex items-center gap-2 md:gap-3 border-l border-border/50 pl-3 md:pl-6">
           <button
             onClick={() => setLanguage(language === "fr" ? "en" : "fr")}
-            className="w-9 h-9 flex items-center justify-center text-[10px] font-black text-accent border border-accent/20 hover:bg-accent hover:text-background rounded-full transition-all duration-300 shadow-sm"
+            className="w-9 h-9 flex items-center justify-center text-[10px] font-black text-accent border border-accent/20 hover:bg-accent hover:text-background rounded-full transition-all duration-300"
             aria-label="Toggle language"
           >
             {language === "fr" ? "FR" : "EN"}
           </button>
-          <div className="w-9 h-9 flex items-center justify-center border border-accent/20 rounded-full hover:border-accent transition-colors shadow-sm">
+          <div className="w-9 h-9 flex items-center justify-center border border-accent/20 rounded-full hover:border-accent transition-colors">
             <ThemeToggle />
           </div>
         </div>
