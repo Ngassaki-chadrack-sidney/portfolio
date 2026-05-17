@@ -61,6 +61,10 @@
     "rights": "All rights reserved.",
     "available": "Available for new projects"
   },
+  "preloader": {
+    "title": "Chadrack Dev",
+    "subtitle": "Full Stack Developer"
+  },
   "cv": {
     "title": "Journey",
     "description": "Full-Stack and Mobile development expertise. Browse my experience or download the PDF version.",
