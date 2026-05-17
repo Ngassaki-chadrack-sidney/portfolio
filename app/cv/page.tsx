@@ -1,52 +1,52 @@
 "use client";
 
 import { Download } from "lucide-react";
-import ContactAndFooter from "@/components/Contact";
+import { useTranslation } from "@/hooks/useTranslation";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function CVPage() {
+  const { t } = useTranslation();
+
   return (
-    <main className="min-h-screen bg-[#050505] text-white">
-      <section className="w-full pt-32 pb-20 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-black tracking-tighter">
-              CV & <span className="text-blue-600">Parcours</span>
+    <main className="min-h-screen pt-32 px-[clamp(1.5rem,5vw,6rem)] bg-background">
+      <section className="py-[clamp(6rem,12vw,8rem)] max-w-7xl mx-auto">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
+          <div className="space-y-6">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-accent">
+              Journey
+            </span>
+            <h1 className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tighter text-foreground leading-[0.9]">
+              Curriculum <span className="text-accent italic">Vitae</span>
             </h1>
-            <p className=" text-lg max-w-xl leading-relaxed">
-              Expertise en développement Full-Stack et Mobile. Consultez mes
-              expériences ou téléchargez la version PDF pour vos archives.
+            <p className="text-xl max-w-xl text-khaki-700 dark:text-khaki-300 font-medium leading-relaxed">
+              {t("cv.description")}
             </p>
           </div>
-          {/* 
-          {/* BOUTON DE TÉLÉCHARGEMENT AMÉLIORÉ */}
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-linear-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-60 transition duration-1000"></div>
-            <a
-              href="/cv.pdf"
-              download="NGASSAKI_Chadrack_CV.pdf" // L'attribut download ne s'active qu'au clic
-              className="relative flex items-center gap-3 bg-white text-black font-extrabold py-5 px-10 rounded-2xl shadow-2xl transition-transform active:scale-95"
-            >
-              <Download size={20} />
-              TÉLÉCHARGER LE PDF
-            </a>
-          </div>
+          
+          <a
+            href="/cv.pdf"
+            download="NGASSAKI_Chadrack_CV.pdf"
+          >
+            <MagneticButton variant="primary" className="px-10 py-5 flex items-center gap-4">
+              <Download size={18} />
+              {t("cv.download")}
+            </MagneticButton>
+          </a>
         </div>
       </section>
 
-      {/* PRÉVISUALISATION (Optionnel mais recommandé) */}
-      <section className="w-full py-24 px-6 md:px-12 lg:px-24">
-        <div className="max-w-5xl mx-auto text-center">
-          <div className="relative aspect-[1/1.414] w-full max-w-3xl mx-auto bg-slate-900 rounded-2xl border border-white/10 shadow-2xl overflow-hidden group">
-            <iframe
-              src="/cv.pdf#toolbar=0"
-              className="w-full h-full border-none"
-              title="CV Preview"
-            />
+      <section className="pb-[clamp(6rem,12vw,14rem)] max-w-7xl mx-auto">
+        <div className="aspect-[1/1.414] w-full max-w-5xl mx-auto bg-surface rounded-3xl overflow-hidden border border-border shadow-2xl relative">
+          <div className="absolute inset-0 flex items-center justify-center -z-10">
+            <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin" />
           </div>
+          <iframe
+            src="/cv.pdf#toolbar=0"
+            className="w-full h-full border-none relative z-10"
+            title="CV Preview"
+          />
         </div>
       </section>
-
-      <ContactAndFooter />
     </main>
   );
 }

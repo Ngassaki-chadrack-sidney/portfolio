@@ -14,8 +14,8 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="p-2 rounded-full bg-transparent" aria-label="Toggle theme">
-        <div className="w-5 h-5" />
+      <button className="p-2" aria-label="Toggle theme">
+        <div className="w-[1.2rem] h-[1.2rem]" />
       </button>
     );
   }
@@ -23,7 +23,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative p-2 rounded-full bg-secondary border border-border hover:border-primary/50 transition-all duration-300"
+      className="relative p-2 text-accent hover:bg-accent hover:text-background rounded-full transition-all duration-300"
       aria-label="Toggle theme"
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

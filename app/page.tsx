@@ -1,21 +1,21 @@
-import About from "@/components/About";
-import ContactAndFooter from "@/components/Contact";
-import ExperienceSection from "@/components/ExperienceSection";
-import Hero from "@/components/Hero";
-import ProjectSectionSlide from "@/components/ProjectSectionSlide";
-import ProjectGrid from "@/components/Projets";
-import StackSection from "@/components/stack";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import Services from "@/components/sections/Services";
+import Stack from "@/components/sections/Stack";
+import Projects from "@/components/sections/Projects";
+import Experience from "@/components/sections/Experience";
+import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="pt-15">
+    <main>
       <Hero />
       <About />
-      <ProjectSectionSlide />
-      <ExperienceSection />
-      <StackSection />
-      <ProjectGrid />
-      <ContactAndFooter />
+      <Services />
+      <Experience />
+      <Projects />
+      <Stack />
+      <Contact />
     </main>
   );
 }

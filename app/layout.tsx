@@ -3,38 +3,48 @@ import "./globals.css";
 import localFont from "next/font/local";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ThemeProvider } from "@/context/ThemeProvider";
-import FloatingNavbar from "@/components/floatingNavBar";
-import SmoothScroll from "@/components/SmoothScroll";
+import GSAPProvider from "@/components/gsap/GSAPProvider";
+import SmoothScrollProvider from "@/components/gsap/SmoothScrollProvider";
+import Navigation from "@/components/layout/Navigation";
+import { PageTransitionProvider } from "@/components/gsap/PageTransitionProvider";
 
 const cabinetGrotesk = localFont({
-  src: "../public/fonts/cabinet-grotesk/CabinetGrotesk-Medium.otf",
+  src: [
+    {
+      path: "../public/fonts/cabinet-grotesk/CabinetGrotesk-Regular.otf",
+      weight: "400",
+    },
+    {
+      path: "../public/fonts/cabinet-grotesk/CabinetGrotesk-Medium.otf",
+      weight: "500",
+    },
+  ],
   display: "swap",
-  variable: "--font-cabinet",
+  variable: "--font-cabinet-grotesk",
 });
 
-// Remplace par ton URL réelle
 const SITE_URL = "https://ngassaki-chadrack.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-
   title: {
     default: "NGASSAKI Chadrack | Développeur Full-Stack & Mobile",
     template: "%s | NGASSAKI Chadrack",
   },
-
   description:
     "Développeur Full-Stack & Mobile spécialisé en React, Next.js et Flutter. Création d'applications performantes et innovantes à Brazzaville.",
-
-  keywords: ["Développeur Full-Stack", "Next.js", "Flutter", "Brazzaville", "Congo"],
-
+  keywords: [
+    "Développeur Full-Stack",
+    "Next.js",
+    "Flutter",
+    "Brazzaville",
+    "Congo",
+  ],
   authors: [{ name: "NGASSAKI Chadrack" }],
   alternates: { canonical: "/" },
-
   verification: {
     google: "jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE",
   },
-
   openGraph: {
     type: "website",
     locale: "fr_FR",
@@ -49,18 +59,15 @@ export const metadata: Metadata = {
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     images: ["/profile.jpeg"],
   },
-
   icons: {
     icon: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
 };
-
 
 export const viewport: Viewport = {
   themeColor: "#000000",
@@ -74,16 +81,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr">
-      <meta name="google-site-verification" content="jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE" />
-<body className={`${cabinetGrotesk.variable} font-sans bg-black text-white antialiased`}>
+    <html lang="fr" suppressHydrationWarning>
+      <meta
+        name="google-site-verification"
+        content="jEZynX7ElAzbTXrm5ywwWwRtKqDVbzkL5Vefz8Oa2gE"
+      />
+      <body className={`${cabinetGrotesk.variable} font-sans`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <LanguageProvider>
-            <SmoothScroll>
-              <FloatingNavbar />
-              {children}
-            </SmoothScroll>
+            <GSAPProvider>
+              <SmoothScrollProvider>
+                <PageTransitionProvider>
+                  <Navigation />
+                  {children}
+                </PageTransitionProvider>
+              </SmoothScrollProvider>
+            </GSAPProvider>
           </LanguageProvider>
-        </body>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

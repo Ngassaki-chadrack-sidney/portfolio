@@ -1,19 +1,40 @@
 {
   "hero": {
-    "available": "Available",
-    "hello": "Hello! I'm",
-    "fullstack": "A Full Stack",
-    "developer": "DEVELOPER",
-    "engineer": "ENGINEER"
+    "title": "Expert Full Stack — Transforming Your Ideas into Digital Realities.",
+    "subtitle": "Specialized in Next.js, React Native & Flutter. Available for freelance projects.",
+    "cta": "View my projects →",
+    "scroll": "Scroll"
   },
   "about": {
-    "title": "Digital Architect, expert in high-impact solutions.",
-    "paragraph1": "My path is not linear, it's complete. I forged my skills as a Frontend Developer before diving into the complexities of Backend and Mobile. This dual expertise allows me to have a 360° vision on every product I build.",
-    "paragraph2": "Today, I don't just code lines; I create mobile solutions that change lives. Whether for international SaaS projects or local infrastructures, my philosophy remains the same: Ship fast, but make it premium."
+    "title": "About",
+    "text": "I turn complex ideas into clean interfaces and high-performance applications. I've learned that tech means nothing without a real understanding of the business. I work in French and English, remote or on-site.",
+    "skills_intro": "Expert in Next.js, React Native & Flutter. Available for freelance projects. — I specialize in crafting high-performance digital solutions that combine exceptional design with technical excellence."
+  },
+  "services": {
+    "title": "Services",
+    "intro": "Providing expert solutions tailored to your unique business needs.",
+    "details": "Details",
+    "web": {
+      "title": "Web Development",
+      "description": "Next.js, TypeScript, APIs, performance, SEO"
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "React Native, Flutter, iOS & Android"
+    },
+    "ecommerce": {
+      "title": "E-commerce",
+      "description": "PrestaShop, custom modules, conversion optimization"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "A selection of digital experiences built with precision and passion.",
+    "view": "View"
   },
   "experience": {
-    "years": "+3years",
-    "domain": "in the field"
+    "title": "Experience",
+    "none": "No experience data found."
   },
   "stack": {
     "title": "Tech Stack",
@@ -23,21 +44,26 @@
     "Mobile": "Mobile",
     "DevOps & Tools": "DevOps & Tools"
   },
-  "projects": {
-    "title": "Projects"
-  },
   "contact": {
-    "title": "Let's Work Together.",
-    "email_label": "Send a message",
-    "footer_available": "Available for new projects",
-    "footer_copyright": "© — NGASSAKI CHADRACK. ALL RIGHTS RESERVED.",
-    "back_to_top": "Back to top ↑"
+    "title": "Let's work together.",
+    "get_in_touch": "Get in touch",
+    "email_me": "Email Me",
+    "location": "Current Location",
+    "city": "Brazzaville, Congo",
+    "designed_with": "Designed with Passion — 2026"
   },
   "navbar": {
-    "home": "Home",
-    "experience": "Experience",
-    "stack": "Stack",
     "projects": "Projects",
-    "cv": "CV"
+    "about": "About",
+    "contact": "Contact"
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "available": "Available for new projects"
+  },
+  "cv": {
+    "title": "Journey",
+    "description": "Full-Stack and Mobile development expertise. Browse my experience or download the PDF version.",
+    "download": "Download PDF"
   }
 }
