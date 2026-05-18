@@ -11,6 +11,9 @@ const stackData = [
       { name: "TypeScript", icon: "typescript/typescript-original" },
       { name: "JavaScript", icon: "javascript/javascript-original" },
       { name: "Tailwind CSS", icon: "tailwindcss/tailwindcss-original" },
+      {name: "HTML5", icon: "html5/html5-original"},
+      {name: "CSS3", icon: "css3/css3-original"},
+      {name: "Bootstrap", icon: "bootstrap/bootstrap-plain"},
     ],
   },
   {
@@ -21,6 +24,7 @@ const stackData = [
       { name: "AdonisJS", icon: "adonisjs/adonisjs-original" },
       { name: "Express", icon: "express/express-original" },
       { name: "PHP", icon: "php/php-plain" },
+      { name: "Rest API", icon: "rest/rest-original" },
     ],
   },
   {
@@ -31,6 +35,8 @@ const stackData = [
       { name: "Prisma", icon: "prisma/prisma-original" },
       { name: "Supabase", icon: "supabase/supabase-plain" },
       { name: "TypeORM", icon: "typeorm/typeorm-plain" },
+      {name: "Lucide", icon: "adonisjs/adonisjs-original"},
+      { name: "SQL", icon: "sql/sql-plain" }
     ],
   },
   {
@@ -55,6 +61,7 @@ const stackData = [
     skills: [
       { name: "VS Code", icon: "vscode/vscode-original" },
       { name: "Cursor", icon: "cursor/cursor-original" },
+      { name: "Chrome Dev Tools", icon: "chrome/chrome-plain" }
     ],
   },
   {
@@ -62,6 +69,8 @@ const stackData = [
     skills: [
       { name: "OpenCode", icon: "terminal/terminal-plain" },
       { name: "Claude Code", icon: "bot/bot-plain" },
+      {name: "Shadcn UI", icon: "shadcn/shadcn-original"},
+      { name: "Daysi ui", icon: "daysi/daysi-original" },
     ],
   },
 ];
