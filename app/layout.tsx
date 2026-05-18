@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     siteName: "NGASSAKI Chadrack Portfolio",
     images: [
       {
-        url: "/profile.jpeg",
+        url: "/Chadrack.png",
         width: 1200,
         height: 630,
         alt: "NGASSAKI Chadrack - Développeur Full-Stack",
@@ -61,10 +61,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/profile.jpeg"],
+    images: ["/Chadrack.png"],
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: "/Chadrack.png",
     apple: "/apple-touch-icon.png",
   },
 };

@@ -33,7 +33,7 @@ export default function About() {
           <div className="lg:col-span-5">
             <div className="relative w-full aspect-4/5 max-w-md mx-auto overflow-hidden rounded-3xl">
               <Image
-                src="/ChadrackDev.png"
+                src="/Chadrack.png"
                 alt="NGASSAKI Chadrack Sidney"
                 fill
                 className="object-contain transition-transform duration-700"
