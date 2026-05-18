@@ -80,12 +80,12 @@ export default function Navigation() {
         <div className="flex items-center gap-2 md:gap-3 border-l border-border/50 pl-3 md:pl-6">
           <button
             onClick={() => setLanguage(language === "fr" ? "en" : "fr")}
-            className="w-9 h-9 flex items-center justify-center text-[10px] font-black text-accent border border-accent/20 hover:bg-accent hover:text-background rounded-full transition-all duration-300"
+            className="w-9 h-9 flex items-center justify-center text-[10px] font-black text-accent border border-accent/20 rounded-full cursor-pointer"
             aria-label="Toggle language"
           >
             {language === "fr" ? "FR" : "EN"}
           </button>
-          <div className="w-9 h-9 flex items-center justify-center border border-accent/20 rounded-full hover:border-accent transition-colors">
+          <div className="w-9 h-9 flex items-center justify-center border border-accent/20 rounded-full cursor-pointer">
             <ThemeToggle />
           </div>
         </div>

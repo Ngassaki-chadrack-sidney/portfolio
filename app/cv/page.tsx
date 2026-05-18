@@ -23,7 +23,7 @@ export default function CVPage() {
             </p>
           </div>
 
-          <a href="/cv.pdf" download="NGASSAKI_Chadrack_CV.pdf">
+          <a href="/ChadrackDevCV.pdf" download="NGASSAKI_Chadrack_CV.pdf">
             <MagneticButton
               variant="primary"
               className="px-10 py-5 flex items-center gap-4"
@@ -38,7 +38,7 @@ export default function CVPage() {
       <section className="pb-[clamp(6rem,12vw,14rem)] max-w-full">
         <div className="aspect-[1/1.414] w-full mx-auto relative">
           <iframe
-            src="/cv.pdf"
+            src="/ChadrackDevCV.pdf"
             className="w-full h-full border-none relative z-10"
             title="CV Preview"
           />
