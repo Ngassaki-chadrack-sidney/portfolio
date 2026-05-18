@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useTranslation } from "@/hooks/useTranslation";
 import { cn } from "@/lib/utils";
 import MagneticButton from "../ui/MagneticButton";
+
 
 const projets = [
   {
@@ -80,27 +80,7 @@ export default function Projects() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".project-card", {
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-          },
-        });
-      }, section);
-      return () => ctx.revert();
-    });
-    return () => mm.revert();
+    // GSAP animations removed for performance optimization.
   }, []);
 
   return (
@@ -146,7 +126,7 @@ export default function Projects() {
                     </h3>
                     <div className="flex -space-x-3">
                       {project.stack.slice(0, 3).map((tech) => (
-                        <div key={tech} className="w-10 h-10 rounded-full bg-background border-2 border-surface p-2 flex items-center justify-center relative hover:z-10 hover:-translate-y-1 transition-all">
+                        <div key={tech} className="w-10 h-10 bg-background/20 backdrop-blur-sm rounded-full border-2 border-surface p-2 flex items-center justify-center relative hover:z-10 hover:-translate-y-1 transition-all">
                           <img
                             src={getIconUrl(tech)}
                             className="w-full h-full object-contain"

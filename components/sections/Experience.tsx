@@ -1,8 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "@/hooks/useTranslation";
 import { experiences } from "@/data/experiences";
 
@@ -34,33 +32,7 @@ export default function Experience() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const items = section.querySelectorAll(".exp-item");
-
-      const ctx = gsap.context(() => {
-        gsap.from(items, {
-          y: 60,
-          // opacity: 0,
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-          },
-        });
-      }, section);
-
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
+    // GSAP animations removed for performance optimization.
   }, []);
 
   return (

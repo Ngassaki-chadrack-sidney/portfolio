@@ -1,8 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const stackData = [
@@ -33,6 +30,7 @@ const stackData = [
       { name: "MySQL", icon: "mysql/mysql-plain" },
       { name: "Prisma", icon: "prisma/prisma-original" },
       { name: "Supabase", icon: "supabase/supabase-plain" },
+      { name: "TypeORM", icon: "typeorm/typeorm-plain" },
     ],
   },
   {
@@ -59,6 +57,13 @@ const stackData = [
       { name: "Cursor", icon: "cursor/cursor-original" },
     ],
   },
+  {
+    category: "Others",
+    skills: [
+      { name: "OpenCode", icon: "terminal/terminal-plain" },
+      { name: "Claude Code", icon: "bot/bot-plain" },
+    ],
+  },
 ];
 
 const getIconUrl = (icon: string) =>
@@ -80,58 +85,19 @@ const fallbackIcons: Record<string, string> = {
 };
 
 export default function Stack() {
-  const containerRef = useRef<HTMLElement>(null);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const section = containerRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const cards = section.querySelectorAll(".stack-card");
-
-      gsap.set(cards, { y: 60, opacity: 0 });
-
-      const ctx = gsap.context(() => {
-        gsap.to(cards, {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          stagger: {
-            each: 0.05,
-            grid: "auto",
-            from: "start",
-          },
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-          },
-        });
-      }, section);
-
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
-  }, []);
 
   return (
     <section
-      ref={containerRef}
       id="stack"
       className="py-[clamp(6rem,12vw,14rem)] px-[clamp(1.5rem,5vw,6rem)] bg-background relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tight mb-24 text-foreground leading-[0.9]">
+        <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tight mb-12 text-foreground leading-[0.9]">
           {t("stack.title")}
         </h2>
 
-        <div className="space-y-32">
+        <div className="space-y-10">
           {stackData.map((group, idx) => (
             <div key={idx} className="space-y-12">
               <h4 className="text-xs font-bold uppercase tracking-[0.4em] text-accent flex items-center gap-6">
@@ -143,9 +109,9 @@ export default function Stack() {
                 {group.skills.map((skill, i) => (
                   <div
                     key={i}
-                    className="stack-card bg-surface/40 border-2 border-surface p-10 rounded-[2.5rem] flex flex-col items-center justify-center gap-8"
+                    className="bg-background/20 backdrop-blur-sm border-2 border-surface p-3 rounded-3xl flex flex-col items-center justify-center gap-2"
                   >
-                    <div className="w-20 h-20 relative">
+                    <div className="w-15 h-15 relative">
                       <img
                         src={
                           fallbackIcons[skill.name] ?? getIconUrl(skill.icon)

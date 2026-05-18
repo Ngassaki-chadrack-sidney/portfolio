@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
 import { useTranslation } from "@/hooks/useTranslation";
 
 const services = [
@@ -15,28 +14,7 @@ export default function Services() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".service-card", {
-          y: 60,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.1,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 75%",
-          },
-        });
-      }, section);
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
+    // GSAP animations removed for performance optimization.
   }, [t]);
 
   return (
@@ -46,7 +24,7 @@ export default function Services() {
           <h2 className="text-[clamp(2.5rem,5vw,5rem)] font-bold tracking-tight text-foreground leading-[0.9]">
             {t("services.title")}
           </h2>
-          <p className="text-khaki-600 dark:text-khaki-400 font-medium max-w-xs text-right">
+          <p className="font-medium text-lg max-w-xs text-right">
             {t("services.intro")}
           </p>
         </div>

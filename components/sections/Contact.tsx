@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
 import { Github, Linkedin, Mail, ArrowUpRight, Twitter } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -13,28 +12,7 @@ export default function Contact() {
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".contact-reveal", {
-          y: 100,
-          opacity: 0,
-          duration: 1.2,
-          stagger: 0.1,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-          },
-        });
-      }, section);
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
+    // GSAP animations removed for performance optimization.
   }, []);
 
   return (
@@ -60,34 +38,34 @@ export default function Contact() {
           <div className="contact-reveal space-y-12">
             <a 
               href="mailto:jrh3948@gmail.com" 
-              className="group flex items-center gap-6"
+              className="flex items-center gap-6"
             >
-              <MagneticButton variant="outline" className="w-24 h-24 rounded-full border border-border flex items-center justify-center">
-                <Mail className="w-10 h-10 group-hover:text-background transition-colors" />
+              <MagneticButton variant="primary" className="w-24 h-24 rounded-full border border-border flex items-center justify-center">
+                <Mail className="w-10 h-10" />
               </MagneticButton>
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-khaki-600 dark:text-khaki-400 mb-2">{t("contact.email_me")}</p>
+                <p className="text-base font-bold uppercase tracking-widest mb-2">{t("contact.email_me")}</p>
                 <p className="text-2xl md:text-4xl font-bold text-foreground group-hover:text-accent transition-colors">jrh3948@gmail.com</p>
               </div>
             </a>
 
             <div className="flex flex-wrap gap-8 pt-8">
               <a href="https://github.com/Ngassaki-chadrack-sidney/" target="_blank" rel="noopener noreferrer">
-                <MagneticButton variant="outline" className="px-10 py-5 flex items-center gap-4 text-base">
+                <MagneticButton variant="primary" className="px-10 py-5 flex items-center gap-4 text-base">
                   <Github className="w-5 h-5" />
                   GitHub
                   <ArrowUpRight className="w-4 h-4 opacity-50" />
                 </MagneticButton>
               </a>
               <a href="https://www.linkedin.com/in/chadrack-sidney-ngassaki-26253635b/" target="_blank" rel="noopener noreferrer">
-                <MagneticButton variant="outline" className="px-10 py-5 flex items-center gap-4 text-base">
+                <MagneticButton variant="primary" className="px-10 py-5 flex items-center gap-4 text-base">
                   <Linkedin className="w-5 h-5" />
                   LinkedIn
                   <ArrowUpRight className="w-4 h-4 opacity-50" />
                 </MagneticButton>
               </a>
               <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
-                <MagneticButton variant="outline" className="px-10 py-5 flex items-center gap-4 text-base">
+                <MagneticButton variant="primary" className="px-10 py-5 flex items-center gap-4 text-base">
                   <Twitter className="w-5 h-5" />
                   Twitter
                   <ArrowUpRight className="w-4 h-4 opacity-50" />

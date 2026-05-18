@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -71,6 +70,10 @@
   --surface: #0f1d24; /* Jet Black 900 */
   --border: #1e3b48; /* Jet Black 800 */
   --muted: #2c586d; /* Jet Black 700 */
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @layer base {

@@ -55,7 +55,7 @@ export default function Navigation() {
           ? "bg-background border-border" 
           : "bg-background/80 backdrop-blur-md border-accent/20"
       )}>
-        <TransitionLink href="/" className="text-lg font-black tracking-tighter uppercase text-accent hover:text-foreground transition-colors mr-2">
+        <TransitionLink href="/" className="text-lg font-black tracking-tighter uppercase mr-2">
           NC
         </TransitionLink>
 

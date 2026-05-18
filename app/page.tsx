@@ -13,8 +13,8 @@ export default function Home() {
       <About />
       <Services />
       <Experience />
-      <Projects />
       <Stack />
+      <Projects />
       <Contact />
     </main>
   );
